@@ -4,6 +4,7 @@ resource "aws_spot_instance_request" "Frontend" {
   spot_type = "one-time"  
 
   connection {
+    host = self.public_ip
     user = "root"
     password = "DevOps321"
   }
