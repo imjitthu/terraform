@@ -9,3 +9,7 @@ variable "R53_ZONE_ID" {
 variable "DOMAIN" {
     default = ""
 }
+
+variable "COMPONENT" {
+    default = ""
+}
