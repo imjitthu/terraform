@@ -11,8 +11,8 @@ resource "aws_spot_instance_request" "frontend" {
   # }
 provisioner "file" {
     when = create
-    source      = "files/*"
-    destination = "/root/www/"
+    source      = "files/index.html"
+    destination = "/root/www/index.html"
   }
 provisioner "file" {
     source      = "templates/roboshop.conf"
@@ -34,7 +34,7 @@ provisioner "remote-exec" {
     ]
 }
   connection {
-    host = "aws_instance.frontend.private_ip"
+    host = "aws_spot_instance_request.frontend.private_ip"
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
