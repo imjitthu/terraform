@@ -33,7 +33,7 @@ provisioner "file" {
   destination   = "/etc/nginx"
 }
   connection {
-    host = "aws_instance.frontend.private_ip"
+    host = self.private_ip
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
