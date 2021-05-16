@@ -8,6 +8,7 @@ resource "aws_spot_instance_request" "Frontend" {
   }
 
 connection {
+host = aws_spot_instance_request.Frontend.private_ip
 type = "ssh"
 user = "root"
 password = "DevOps321"
