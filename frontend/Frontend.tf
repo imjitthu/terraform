@@ -37,7 +37,7 @@ provisioner "file" {
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
-    timeout = "30s"
+    #timeout = "30s"
   }
 }
 
