@@ -9,7 +9,7 @@ resource "aws_spot_instance_request" "frontend" {
   # connection {
   #   host = self.private_ip
   # }
-resource "null_resource" "Install_NGINX" {
+#resource "null_resource" "Install_NGINX" {
 provisioner "remote-exec" {
     when = create
     inline = [
@@ -19,7 +19,7 @@ provisioner "remote-exec" {
       "systemctl restart nginx",
     ]
 }
-}
+#}
 provisioner "file" {
     when = create
     source      = "files/index.html"
