@@ -15,6 +15,6 @@ resource "aws_route53_record" "WorkStation" {
 }
 
 output "EC2_Details" {
-    value = "aws_instance.${var.COMPONENT}.public_ip"
+    value = "aws_instance.WorkStation.public_ip"
     description = "Publisc IP of WorkStation"
 }
