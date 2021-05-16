@@ -1,17 +1,16 @@
-resource "aws_spot_instance_request" "frontend" {
+resource "aws_instance" "frontend" {
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
-  spot_type = "one-time"  
-
+  #spot_type = "one-time"  aws_spot_instance_request
   tags = {
-    "Name" = "${var.COMPONENT}"
+    "Name" = "${var.COMPONENT}-Web-Server"
   }
-  connection {
-    host = "aws_spot_instance_request.frontend.private_ip"
+connection {
     type = "ssh"
+    host = aws_instance.frontend.public_ip
     user = "root"
     password = "${var.PASSWORD}"
-  }
+    }
   # connection {
   #   host = self.private_ip
   # }
@@ -20,8 +19,6 @@ provisioner "remote-exec" {
     inline = [
       "set-hostname frontend",
       "yum install nginx -y",
-      "systemctl enable nginx",
-      "systemctl restart nginx",
     ]
 }
 provisioner "file" {
@@ -37,6 +34,13 @@ provisioner "file" {
 provisioner "file" {
   source        = "templates/nginx.conf"
   destination   = "/etc/nginx"
+}
+provisioner "remote-exec" {
+    when = create
+    inline = [
+      "systemctl enable nginx",
+      "systemctl restart nginx",
+    ]
 }
 provisioner "local-exec" {
    command = "echo ${self.public_ip} > public_ip.txt"
