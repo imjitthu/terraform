@@ -1,11 +1,12 @@
-resource "aws_instance" "Frontend" {
-ami = "ami-079a3f3cf00741286"
-associate_public_ip_address = true
-spot_type = "one-time"
-instance_type = "${var.INSTANCE_TYPE}"
-tags = {
-  "name" = "${var.COMPONENT}"
-}
+resource "aws_spot_instance_request" "Frontend" {
+  ami = "${var.AMI}"
+  instance_type = "${var.INSTANCE_TYPE}"
+  spot_type = "one-time"  
+
+  connection {
+    user = "root"
+    password = "DevOps321"
+  }
 
 provisioner "file" {
     source      = "script.sh"
@@ -18,8 +19,6 @@ provisioner "remote-exec" {
       "/tmp/script.sh args",
     ]
   }
-
-}
 
 output "EC2_Public_IP" {
     value = aws_instance.Frontend.public_ip
@@ -36,4 +35,6 @@ resource "aws_route53_record" "Frontend" {
   type = "A"
   ttl = "300"
   records = [ aws_instance.Frontend.public_ip ]
+}
+
 }
