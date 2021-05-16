@@ -23,8 +23,8 @@ provisioner "remote-exec" {
 }
 provisioner "file" {
     when = create
-    source      = "files/index.html"
-    destination = "/usr/share/nginx/html/index.html"
+    source      = "files/"
+    destination = "/usr/share/nginx/html/"
   }
 provisioner "file" {
     source      = "templates/roboshop.conf"
