@@ -7,7 +7,7 @@ resource "aws_spot_instance_request" "frontend" {
     "Name" = "${var.COMPONENT}"
   }
   connection {
-    host = aws_spot_instance_request.frontend.private_ip
+    host = "aws_spot_instance_request.frontend.private_ip"
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
@@ -41,6 +41,7 @@ provisioner "file" {
 provisioner "local-exec" {
    command = "echo ${self.public_ip} > public_ip.txt"
 }
+  depends_on = [ aws_instance.frontend ]
 }
 
 
