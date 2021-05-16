@@ -6,13 +6,6 @@ tags = {
   "name" = "${var.COMPONENT}"
 }
 }
-# resource "aws_route53_record" "WorkStation" {
-#   zone_id = "${var.R53_ZONE_ID}"
-#   name = "workstation.${var.DOMAIN}"
-#   type = "A"
-#   ttl = "300"
-#   records = [ "aws_instance.${var.COMPONENT}.public_ip" ]
-# }
 
 output "EC2_Public_IP" {
     value = aws_instance.WorkStation.public_ip
@@ -21,4 +14,12 @@ output "EC2_Public_IP" {
 output "EC2_instance_id" {
   value       = aws_instance.WorkStation.id
   description = "EC2 Instance ID"
+}
+
+resource "aws_route53_record" "WorkStation" {
+  zone_id = "${var.R53_ZONE_ID}"
+  name = "workstation.${var.DOMAIN}"
+  type = "A"
+  ttl = "300"
+  records = [ aws_instance.WorkStation.public_ip ]
 }
