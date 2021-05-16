@@ -19,6 +19,6 @@ output "EC2_Public_IP" {
     description = "Publisc IP of WorkStation"
 }
 output "EC2_instance_id" {
-  description = "ID of the EC2 instance"
-  value       = self.id
+  value       = aws_instance.WorkStation.id
+  description = "EC2 Instance ID"
 }
