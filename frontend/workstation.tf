@@ -7,27 +7,30 @@ resource "aws_spot_instance_request" "Frontend" {
     "Name" = "${var.COMPONENT}"
   }
 
-  connection {
+provisioner "file" {
+    when = create
+    source      = "files/*"
+    destination = "/root/www/"
+    connection {
     type = "ssh"
     host = self.public_ip
     user = "root"
     password = "DevOps321"
   }
-
-provisioner "file" {
-    source      = "files/*"
-    destination = "/root/www/"
   }
 
-provisioner "remote-exec" {
+
+
+provisioner "local-exec" {
+    when = create
     inline = [
-      "set-hostname Frontend"
-      "disable-auto-shutdown"
+      "set-hostname Frontend",
+      "disable-auto-shutdown",
       "yum install nginx -y",
       "systemctl enable nginx",
       "systemctl restart nginx",
     ]
-  }
+}
 
 provisioner "file" {
     source      = "templates/nginx.conf"
