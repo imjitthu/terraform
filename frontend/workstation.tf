@@ -8,7 +8,7 @@ resource "aws_spot_instance_request" "Frontend" {
   }
 
   connection {
-    host = self.public_ip
+    host = "self.public_ip"
     user = "root"
     password = "DevOps321"
   }
