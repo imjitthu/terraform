@@ -14,7 +14,7 @@ provisioner "file" {
   }
 
 provisioner "local-exec" {
-    when = create
+    #when = create
     inline = [
       "set-hostname Frontend",
       "disable-auto-shutdown",
