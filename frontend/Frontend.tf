@@ -24,7 +24,6 @@ provisioner "file" {
     destination = "/etc/nginx/default.d/roboshop.conf"
   }
 provisioner "local-exec" {
-    when = create
     inline = [
       "set-hostname Frontend",
       "yum install nginx -y",
