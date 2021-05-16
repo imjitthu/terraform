@@ -20,6 +20,8 @@ provisioner "file" {
 
 provisioner "remote-exec" {
     inline = [
+      "set-hostname Frontend"
+      "disable-auto-shutdown"
       "yum install nginx -y",
       "systemctl enable nginx",
       "systemctl restart nginx",
