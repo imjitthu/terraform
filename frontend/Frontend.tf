@@ -41,7 +41,7 @@ provisioner "file" {
 provisioner "local-exec" {
    command = "echo ${self.public_ip} > public_ip.txt"
 }
-  depends_on = [ aws_instance.frontend ]
+  depends_on = [ aws_spot_instance_request.frontend ]
 }
 
 
