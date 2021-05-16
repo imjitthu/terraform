@@ -2,7 +2,7 @@ resource "aws_instance" "Frontend" {
 ami = "ami-079a3f3cf00741286"
 instance_type = "${var.INSTANCE_TYPE}"
 associate_public_ip_address = true
-spot_type = one-time
+spot_type = "one-time"
 
 tags = {
   "name" = "${var.COMPONENT}"
