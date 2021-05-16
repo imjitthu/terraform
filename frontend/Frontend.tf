@@ -34,7 +34,7 @@ provisioner "remote-exec" {
     ]
 }
   connection {
-    host = "self.private_ip"
+    host = "aws_instance.frontend.private_ip"
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
