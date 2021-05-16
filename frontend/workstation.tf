@@ -11,15 +11,7 @@ provisioner "file" {
     when = create
     source      = "files/*"
     destination = "/root/www/"
-    connection {
-    type = "ssh"
-    host = self.public_ip
-    user = "root"
-    password = "DevOps321"
   }
-  }
-
-
 
 provisioner "local-exec" {
     when = create
