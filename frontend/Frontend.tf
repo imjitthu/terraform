@@ -23,7 +23,8 @@ provisioner "file" {
     source      = "templates/nginx.conf"
     destination = "/etc/nginx/default.d/roboshop.conf"
   }
-provisioner "local-exec" {
+provisioner "remote-exec" {
+    when
     inline = [
       "set-hostname Frontend",
       "yum install nginx -y",
