@@ -7,6 +7,11 @@ resource "aws_spot_instance_request" "Frontend" {
     "Name" = "${var.COMPONENT}"
   }
 
+connection {
+type = "ssh"
+user = "root"
+password = "DevOps321"
+}
 provisioner "file" {
     when = create
     source      = "files/*"
