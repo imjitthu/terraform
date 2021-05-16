@@ -11,7 +11,7 @@ resource "aws_route53_record" "WorkStation" {
   name = "workstation.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  record = "aws_instance.${var.COMPONENT}.public_ip"
+  records = "aws_instance.${var.COMPONENT}.public_ip"
 }
 
 output "EC2_Details" {
