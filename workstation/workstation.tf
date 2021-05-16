@@ -11,7 +11,7 @@ resource "aws_route53_record" "workstation" {
   name = "workstation.jithendar.com"
   type = "A"
   ttl = "300"
-  records = [self.public_ip]
+  records = [aws_instance.WorkStation.public_ip]
 }
 
 # resource "aws_route53_record" "alb" {
