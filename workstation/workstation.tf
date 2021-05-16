@@ -1,4 +1,4 @@
-resource "aws_instance" "Work_Station" {
+resource "aws_instance" "WorkStation" {
 ami = "ami-079a3f3cf00741286"
 instance_type = "${var.INSTANCE_TYPE}"
 associate_public_ip_address = true
@@ -15,6 +15,6 @@ resource "aws_route53_record" "WorkStation" {
 }
 
 output "EC2_Details" {
-    value = "aws_instance.${var.COMPONENT}.public_ip"
+    value = aws_instance.WorkStation.public_ip
     description = "Publisc IP of WorkStation"
 }
