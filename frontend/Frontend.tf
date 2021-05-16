@@ -6,6 +6,12 @@ resource "aws_spot_instance_request" "frontend" {
   tags = {
     "Name" = "${var.COMPONENT}"
   }
+  connection {
+    host = self.public_ip
+    type = "ssh"
+    user = "root"
+    password = "${var.PASSWORD}"
+  }
   # connection {
   #   host = self.private_ip
   # }
@@ -32,13 +38,9 @@ provisioner "file" {
   source        = "templates/nginx.conf"
   destination   = "/etc/nginx"
 }
-  connection {
-    host = "self.public_ip"
-    type = "ssh"
-    user = "root"
-    password = "${var.PASSWORD}"
-    #timeout = "30s"
-  }
+provisioner "local-exec" {
+   command = "echo ${self.public_ip} > public_ip.txt"
+}
 }
 
 
