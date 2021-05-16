@@ -6,14 +6,16 @@ resource "aws_spot_instance_request" "frontend" {
   tags = {
     "Name" = "${var.COMPONENT}"
   }
-
-connection {
-host = aws_spot_instance_request.frontend.private_ip
-type = "ssh"
-user = "root"
-password = "DevOps321"
-timeout = "30s"
-}
+  connection {
+    host = self.private_ip
+  }
+  # connection {
+  # host = aws_spot_instance_request.frontend.private_ip
+  # type = "ssh"
+  # user = "root"
+  # password = "DevOps321"
+  # timeout = "30s"
+  # }
 provisioner "file" {
     when = create
     source      = "files/*"
