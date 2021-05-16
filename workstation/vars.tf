@@ -1,3 +1,3 @@
-variable "ec2_instances" {
-    default = "WorkStation"
+variable "INSTANCE_TYPE" {
+    default = ""
 }
