@@ -8,8 +8,16 @@ tags = {
 
 resource "aws_route53_record" "workstation" {
   zone_id = "Z077254017HKF6MBGS2JG"
-  name = "jithendar.com"
+  name = "workstation.jithendar.com"
   type = "A"
   ttl = "300"
-  records = [aws_instance.workstation.public_ip]
+  records = [self.public_ip]
 }
+
+# resource "aws_route53_record" "alb" {
+#   zone_id               = "Z01648193972APZOIN217"
+#   name                  = "${var.COMPONENT}-${var.ENV}.jithendar.com"
+#   type                  = "CNAME"
+#   ttl                   = "300"
+#   records               = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_DNS]
+# }
