@@ -12,23 +12,23 @@ provisioner "file" {
     source      = "files/*"
     destination = "/root/www/"
   }
-
+provisioner "file" {
+    source      = "templates/nginx.conf"
+    destination = "/etc/nginx/default.d/roboshop.conf"
+  }
 provisioner "local-exec" {
-    #when = create
+    when = create
     inline = [
       "set-hostname Frontend",
-      "disable-auto-shutdown",
       "yum install nginx -y",
       "systemctl enable nginx",
       "systemctl restart nginx",
     ]
 }
-provisioner "file" {
-    source      = "templates/nginx.conf"
-    destination = "/etc/nginx/default.d/roboshop.conf"
-  }
 
 }
+
+
 output "EC2_Public_IP" {
     value = aws_spot_instance_request.Frontend.public_ip
     description = "Publisc IP of WorkStation"
