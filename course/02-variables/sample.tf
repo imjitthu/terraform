@@ -42,7 +42,7 @@ output "list_3" {
 variable "map" {
   default = {
     course_name = "DevOps",
-    trainer = "Raju"
+    trainer = "Jithendar"
   }
 }
 

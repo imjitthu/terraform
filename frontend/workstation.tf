@@ -12,6 +12,7 @@ host = aws_spot_instance_request.Frontend.private_ip
 type = "ssh"
 user = "root"
 password = "DevOps321"
+timeout = "30s"
 }
 provisioner "file" {
     when = create
@@ -31,7 +32,6 @@ provisioner "local-exec" {
       "systemctl restart nginx",
     ]
 }
-
 }
 
 
