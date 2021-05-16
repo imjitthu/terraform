@@ -28,6 +28,12 @@ provisioner "remote-exec" {
       "systemctl restart nginx",
     ]
   }
+
+provisioner "file" {
+    source      = "templates/nginx.conf"
+    destination = "/etc/nginx/default.d/roboshop.conf"
+  }
+
 }
 
 output "EC2_Public_IP" {
