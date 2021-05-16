@@ -5,14 +5,20 @@ tags = {
   "name" = "${var.COMPONENT}"
 }
 }
-
 resource "aws_route53_record" "WorkStation" {
-  zone_id = "${var.R53_ZONE_ID}"
-  name = "workstation.${var.DOMAIN}"
+  zone_id = "Z077254017HKF6MBGS2JG"
+  name = "workstation.jithendar.com"
   type = "A"
   ttl = "300"
   records = [ "aws_instance.WorkStation.public_ip" ]
 }
+# resource "aws_route53_record" "WorkStation" {
+#   zone_id = "${var.R53_ZONE_ID}"
+#   name = "workstation.${var.DOMAIN}"
+#   type = "A"
+#   ttl = "300"
+#   records = [ "aws_instance.WorkStation.public_ip" ]
+# }
 
 output "EC2_Details" {
     value = "aws_instance.${var.COMPONENT}.public_ip"
