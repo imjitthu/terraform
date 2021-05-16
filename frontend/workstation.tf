@@ -3,6 +3,10 @@ resource "aws_spot_instance_request" "Frontend" {
   instance_type = "${var.INSTANCE_TYPE}"
   spot_type = "one-time"  
 
+  tags = {
+    "Name" = "${var.COMPONENT}"
+  }
+
   connection {
     host = self.public_ip
     user = "root"
@@ -20,13 +24,14 @@ provisioner "remote-exec" {
       "/tmp/script.sh args",
     ]
   }
+}
 
 output "EC2_Public_IP" {
-    value = aws_instance.Frontend.public_ip
+    value = aws_spot_instance_request.Frontend.public_ip
     description = "Publisc IP of WorkStation"
 }
 output "EC2_instance_id" {
-  value       = aws_instance.Frontend.id
+  value       = aws_spot_instance_request.Frontend.id
   description = "EC2 Instance ID"
 }
 
@@ -35,7 +40,6 @@ resource "aws_route53_record" "Frontend" {
   name = "workstation.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [ aws_instance.Frontend.public_ip ]
+  records = [ aws_spot_instance_request.Frontend.public_ip ]
 }
 
-}
