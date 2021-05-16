@@ -45,16 +45,16 @@ provisioner "remote-exec" {
 provisioner "local-exec" {
    command = "echo ${self.public_ip} > public_ip.txt"
 }
-  depends_on = [ aws_spot_instance_request.frontend ]
+  depends_on = [ aws_instance.frontend ]
 }
 
 
 output "EC2_Public_IP" {
-    value = aws_spot_instance_request.frontend.public_ip
+    value = aws_instance.frontend.public_ip
     description = "Publisc IP of WorkStation"
 }
 output "EC2_instance_id" {
-  value       = aws_spot_instance_request.frontend.id
+  value       = aws_instance.frontend.id
   description = "EC2 Instance ID"
 }
 resource "aws_route53_record" "frontend" {
@@ -62,6 +62,6 @@ resource "aws_route53_record" "frontend" {
   name = "${var.COMPONENT}.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [ aws_spot_instance_request.frontend.public_ip ]
+  records = [ aws_instance.frontend.public_ip ]
 }
 
