@@ -33,15 +33,13 @@ provisioner "remote-exec" {
       "systemctl restart nginx",
     ]
 }
-
   connection {
-    host = aws_spot_instance_request.frontend.private_ip
+    host = "self.private_ip"
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
     timeout = "30s"
   }
-
 }
 
 
