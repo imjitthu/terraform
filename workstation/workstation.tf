@@ -14,7 +14,11 @@ tags = {
 #   records = [ "aws_instance.${var.COMPONENT}.public_ip" ]
 # }
 
-output "EC2_Details" {
-    value = "aws_instance.${var.COMPONENT}.public_ip"
+output "EC2_Public_IP" {
+    value = aws_instance.WorkStation.public_ip
     description = "Publisc IP of WorkStation"
+}
+output "EC2_instance_id" {
+  description = "ID of the EC2 instance"
+  value       = self.id
 }
