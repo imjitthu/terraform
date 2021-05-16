@@ -6,7 +6,7 @@ tags = {
 }
 }
 
-resource "aws_route53_record" "Workstation" {
+resource "aws_route53_record" "WorkStation" {
   zone_id = "${var.R53_ZONE_ID}"
   name = "workstation.${var.DOMAIN}"
   type = "A"
