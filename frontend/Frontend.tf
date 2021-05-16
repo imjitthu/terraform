@@ -7,7 +7,7 @@ resource "aws_spot_instance_request" "frontend" {
     "Name" = "${var.COMPONENT}"
   }
   connection {
-    host = self.public_ip
+    host = aws_spot_instance_request.frontend.private_ip
     type = "ssh"
     user = "root"
     password = "${var.PASSWORD}"
