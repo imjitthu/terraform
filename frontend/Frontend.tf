@@ -20,7 +20,7 @@ provisioner "file" {
     destination = "/root/www/"
   }
 provisioner "file" {
-    source      = "templates/nginx.conf"
+    source      = "templates/roboshop.conf"
     destination = "/etc/nginx/default.d/roboshop.conf"
   }
 provisioner "remote-exec" {
