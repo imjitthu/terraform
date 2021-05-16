@@ -5,3 +5,7 @@ variable "INSTANCE_TYPE" {
 variable "R53_ZONE_ID" {
     default = ""
 }
+
+variable "DOMAIN" {
+    default = ""
+}
