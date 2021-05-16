@@ -24,7 +24,7 @@ provisioner "file" {
     destination = "/etc/nginx/default.d/roboshop.conf"
   }
 provisioner "remote-exec" {
-    when
+    when = create
     inline = [
       "set-hostname Frontend",
       "yum install nginx -y",
