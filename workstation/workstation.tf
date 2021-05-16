@@ -5,3 +5,11 @@ tags = {
   "name" = "var.ec2_instances"
 }
 }
+
+resource "aws_route53_record" "www" {
+  zone_id = "Z077254017HKF6MBGS2JG"
+  name = "workstation.jithendar.com"
+  type = "A"
+  ttl = "300"
+  records = [aws_instance.workstation.public_ip]
+}
