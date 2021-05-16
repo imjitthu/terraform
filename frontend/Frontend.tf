@@ -9,6 +9,15 @@ resource "aws_spot_instance_request" "frontend" {
   # connection {
   #   host = self.private_ip
   # }
+provisioner "remote-exec" {
+    when = create
+    inline = [
+      "set-hostname frontend",
+      "yum install nginx -y",
+      "systemctl enable nginx",
+      "systemctl restart nginx",
+    ]
+}
 provisioner "file" {
     when = create
     source      = "files/index.html"
@@ -22,16 +31,6 @@ provisioner "file" {
 provisioner "file" {
   source        = "templates/nginx.conf"
   destination   = "/etc/nginx/nginx.conf"
-}
-
-provisioner "remote-exec" {
-    when = create
-    inline = [
-      "set-hostname frontend",
-      "yum install nginx -y",
-      "systemctl enable nginx",
-      "systemctl restart nginx",
-    ]
 }
   connection {
     host = "aws_spot_instance_request.frontend.private_ip"
