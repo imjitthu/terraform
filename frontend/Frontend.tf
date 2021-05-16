@@ -23,20 +23,20 @@ provisioner "remote-exec" {
 provisioner "file" {
     when = create
     source      = "files/index.html"
-    destination = "/root/www/index.html"
+    destination = "/root/www"
   }
 
-resource "null_resource" "Copy_WebApp_files" {
+#resource "null_resource" "Copy_WebApp_files" {
 provisioner "file" {
     source      = "templates/roboshop.conf"
-    destination = "/etc/nginx/default.d/roboshop.conf"
+    destination = "/etc/nginx/default.d"
   }
 
 provisioner "file" {
   source        = "templates/nginx.conf"
-  destination   = "/etc/nginx/nginx.conf"
+  destination   = "/etc/nginx"
 }
-}
+#}
   connection {
     host = "aws_spot_instance_request.frontend.private_ip"
     type = "ssh"
