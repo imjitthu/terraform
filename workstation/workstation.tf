@@ -11,10 +11,10 @@ resource "aws_route53_record" "WorkStation" {
   name = "workstation.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [aws_instance.WorkStation.public_ip]
+  records = [aws_instance.${var.COMPONENT}.public_ip]
 }
 
 output "EC2_Details" {
-    value = "aws_instance.WorkStation.public_ip"
+    value = "aws_instance.${var.COMPONENT}.public_ip"
     description = "Publisc IP of WorkStation"
 }
