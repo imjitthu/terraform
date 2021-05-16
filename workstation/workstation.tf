@@ -1,8 +1,8 @@
-resource "aws_instance" "var.COMPONENT" {
+resource "aws_instance" "WorkStation" {
 ami = "ami-079a3f3cf00741286"
 instance_type = "${var.INSTANCE_TYPE}"
 tags = {
-  "name" = "Work_Station"
+  "name" = "${var.COMPONENT}"
 }
 }
 
