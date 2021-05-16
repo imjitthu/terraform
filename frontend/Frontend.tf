@@ -9,7 +9,6 @@ resource "aws_spot_instance_request" "frontend" {
   # connection {
   #   host = self.private_ip
   # }
-#resource "null_resource" "Install_NGINX" {
 provisioner "remote-exec" {
     when = create
     inline = [
@@ -19,14 +18,11 @@ provisioner "remote-exec" {
       "systemctl restart nginx",
     ]
 }
-#}
 provisioner "file" {
     when = create
     source      = "files/index.html"
     destination = "/root/www"
   }
-
-#resource "null_resource" "Copy_WebApp_files" {
 provisioner "file" {
     source      = "templates/roboshop.conf"
     destination = "/etc/nginx/default.d"
@@ -36,7 +32,6 @@ provisioner "file" {
   source        = "templates/nginx.conf"
   destination   = "/etc/nginx"
 }
-#}
   connection {
     host = "aws_spot_instance_request.frontend.private_ip"
     type = "ssh"
