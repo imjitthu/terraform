@@ -24,16 +24,16 @@ provisioner "remote-exec" {
 provisioner "file" {
     when = create
     source      = "files/index.html"
-    destination = "/root/www/"
+    destination = "/root/www/index.html"
   }
 provisioner "file" {
     source      = "templates/roboshop.conf"
-    destination = "/etc/nginx/default.d/"
+    destination = "/etc/nginx/default.d/roboshop.conf"
   }
 
 provisioner "file" {
   source        = "templates/nginx.conf"
-  destination   = "/etc/nginx"
+  destination   = "/etc/nginx/nginx.conf"
 }
 provisioner "remote-exec" {
     when = create
