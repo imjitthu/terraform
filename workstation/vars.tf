@@ -10,6 +10,4 @@ variable "DOMAIN" {
     default = ""
 }
 
-variable "COMPONENT" {
-    default = ""
-}
+variable "COMPONENT" {}
