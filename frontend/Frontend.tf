@@ -9,7 +9,7 @@ resource "aws_spot_instance_request" "frontend" {
   # connection {
   #   host = self.private_ip
   # }
-resource "null_resource" "Install NGINX" {
+resource "null_resource" "Install_NGINX" {
 provisioner "remote-exec" {
     when = create
     inline = [
