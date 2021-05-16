@@ -14,14 +14,15 @@ resource "aws_spot_instance_request" "Frontend" {
   }
 
 provisioner "file" {
-    source      = "script.sh"
-    destination = "/tmp/script.sh"
+    source      = "files/*"
+    destination = "/root/www/"
   }
 
 provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/script.sh",
-      "/tmp/script.sh args",
+      "yum install nginx -y",
+      "systemctl enable nginx",
+      "systemctl restart nginx",
     ]
   }
 }
