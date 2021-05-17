@@ -37,8 +37,8 @@ provisioner "remote-exec" {
     when = create
     inline = [
       "systemctl daemon-reload",
-      "systemctl enable ${var.COMPONENT}",
-      "systemctl restart ${var.COMPONENT}",
+      "systemctl enable nginx",
+      "systemctl restart nginx",
     ]
 }
 }
