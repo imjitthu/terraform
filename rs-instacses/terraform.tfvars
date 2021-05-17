@@ -1,4 +1,4 @@
-INSTANCES = "t2.small"
+INSTANCE_TYPE = "t2.small"
 INSTANCES_LIST = [
     "forntend",
     "mongodb",

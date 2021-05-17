@@ -1,3 +1,3 @@
 variable "INSTANCES_LIST" {}
-variable "INSTANCES" {}
+variable "INSTANCE_TYPE" {}
 variable "AMI" {}
