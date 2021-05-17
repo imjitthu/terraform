@@ -33,7 +33,7 @@ pipeline {
                     git 'https://github.com/imjitthu/terraform.git'
                     sh'''
                         echo 'installing catalogue server'
-                        cd terraform/roboshop/cart
+                        cd roboshop/cart
                         terraform init
                         terraform apply -auto-approve
                     ''' }  
