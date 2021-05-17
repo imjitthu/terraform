@@ -23,6 +23,10 @@ provisioner "remote-exec" {
 }
 
 output "instances" {
-  value = "aws_instance.[each.value].public_ip"
+  value = [
+    "aws_instance.frontend.public_ip",
+    "aws_instance.mysql.public_ip",
+    "aws_instance.mongodb.public_ip",
+    ]
   description = "Publuc IPs"
 }
