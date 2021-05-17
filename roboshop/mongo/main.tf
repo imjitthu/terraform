@@ -22,7 +22,7 @@ provisioner "file" {
   provisioner "file" {
     when = create
     source      = "files/"
-    destination = "/root"
+    destination = "/root/"
   }
 provisioner "remote-exec" {
     when = create
