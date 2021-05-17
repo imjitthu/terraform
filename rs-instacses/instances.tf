@@ -15,9 +15,6 @@ resource "aws_instance" "instances" {
 
 provisioner "local-exec" {
   when = create
-  inline = [
-     "set-hostname frontend",
-     "yum install nginx -y",
-    ]  
+  inline = "sh mkinv.sh"
 }
 }
