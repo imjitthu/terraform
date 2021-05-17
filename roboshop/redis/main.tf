@@ -1,4 +1,4 @@
-resource "aws_instance" "cart" {
+resource "aws_instance" "redis" {
   # aws_spot_instabce_request for spot instance
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
@@ -8,32 +8,22 @@ resource "aws_instance" "cart" {
   }
 connection {
     type = "ssh"
-    host = aws_instance.cart.public_ip
+    host = aws_instance.redis.public_ip
     user = "root"
     password = "${var.PASSWORD}"
     }
-
-provisioner "file" {
-    when = create
-    source      = "files/"
-    destination = "/home/roboshop/${var.COMPONENT}"
-  }
 
 provisioner "remote-exec" {
     when = create
     inline = [
       "set-hostname ${var.COMPONENT}",
-      "mkdir -p /home/roboshop/${var.COMPONENT}",
-      "cd /home/roboshop/${var.COMPONENT}",
-      "npm install --unsafe-perm",
+      "yum install epel-release yum-utils -y",
+      "yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y",
+      "yum-config-manager --enable remi",
+      "yum install redis -y",
+      "sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf",
     ]
 }
-
-provisioner "file" {
-    when = create
-    source      = "templates/cart.service"
-    destination = "/home/roboshop/${var.COMPONENT}/cart.service"
-  }
 
 
 provisioner "remote-exec" {
@@ -43,6 +33,7 @@ provisioner "remote-exec" {
       "systemctl enable ${var.COMPONENT}",
       "systemctl restart ${var.COMPONENT}",
     ]
+}
 }
 
 resource "aws_route53_record" "frontend" {
