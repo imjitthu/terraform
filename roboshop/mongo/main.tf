@@ -29,8 +29,8 @@ provisioner "remote-exec" {
     inline = [
       "set-hostname ${var.COMPONENT}",
       "yum install mongodb-org -y",
-      "mongo < catalogue.js",
-      "mongo < users.js",
+      "mongo < /root/catalogue.js",
+      "mongo < /root/users.js",
       "sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf",
       "systemctl daemon-reload",
       "systemctl enable mongod",
