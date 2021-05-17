@@ -20,7 +20,5 @@ variable "SUBNET_CIDR" {}
 # }
 
 #Get Availability Zones from DataSources
-data "aws_availability_zones" "AVZ" {
-  state = "available"
-}
+data "aws_availability_zones" "AVZ" {}
 

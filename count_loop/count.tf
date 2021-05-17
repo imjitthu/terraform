@@ -7,7 +7,7 @@ resource "aws_vpc" "VPC_Count" {
 }
 
 #Get Availability Zones from DataSources
-data "aws_availability_zones" "AVZ" {}
+data "aws_availability_zones" "AVZz" {}
 
 resource "aws_subnet" "subnets" {
   count = "${length(data.aws_availibility_zones.AVZ.names)}"
