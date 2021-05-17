@@ -33,6 +33,7 @@ pipeline {
                     echo 'Downloading from GITHub'
                     git 'https://github.com/imjitthu/terraform.git'
                     sh'''
+                        sleep 2s
                         echo 'installing redis server'
                         cd roboshop/redis
                         terraform init
