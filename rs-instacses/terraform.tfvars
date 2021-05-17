@@ -1,7 +1,14 @@
 INSTANCES_LIST = [
-    "forntend",
-    "mongodb",
+    "cart",
+    "catalogue",
+    "frontend",
+    "mongo",
     "mysql",
+    "payment",
+    "rabbitmq",
+    "redis",
+    "shipping",
+    "user",
 ]
 AMI             = "ami-079a3f3cf00741286"
 INSTANCE_TYPE   = "t2.small"

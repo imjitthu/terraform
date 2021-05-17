@@ -5,19 +5,3 @@ resource "aws_instance" "instances" {
   tags = {
     Name = each.value
   }
-
-connection {
-  type = "ssh"
-  user = "root"
-  password = "${var.PASSWORD}"
-  host = self.private_ip
-}
-
-provisioner "remote-exec" {
-  when = create
-  inline = [
-     "set-hostname frontend",
-     "yum install nginx -y",
-    ]  
-}
-}
