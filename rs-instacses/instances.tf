@@ -23,6 +23,6 @@ provisioner "remote-exec" {
 }
 
 output "instances" {
-  value = aws_instance.[each.value].public_ip
+  value = "aws_instance.[each.value].public_ip"
   description = "Publuc IPs"
 }
