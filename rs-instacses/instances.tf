@@ -11,5 +11,5 @@ connection {
   type = "ssh"
   user = "root"
   password = "${var.PASSWORD}"
-  host = aws_instance.${each.value}.public_ip
+  host = aws_instance."${each.value}".public_ip
 }
