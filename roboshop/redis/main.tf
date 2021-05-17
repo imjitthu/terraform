@@ -36,10 +36,10 @@ provisioner "remote-exec" {
 }
 }
 
-resource "aws_route53_record" "frontend" {
+resource "aws_route53_record" "redis" {
   zone_id = "${var.R53_ZONE_ID}"
   name = "${var.COMPONENT}.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [ aws_instance.frontend.public_ip ]
+  records = [ aws_instance.redis.public_ip ]
 }
