@@ -15,6 +15,9 @@ resource "aws_instance" "instances" {
 
 provisioner "local-exec" {
   when = create
-  inline = "sh mkinv.sh"
+  inline = [ 
+    "sh mkinv.sh",
+    "sh l_ins.sh routes",
+  ]
 }
 }

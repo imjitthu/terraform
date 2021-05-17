@@ -73,7 +73,8 @@ pipeline {
         stage('installing frontend web-server') {
             steps {
                 sh'''
-                    echo 'installing frontend server'
+                echo 'installing frontend server'
+                sleep 1s
                 ''' }  
                     }
         stage('Roboshop components installed successfully') {
