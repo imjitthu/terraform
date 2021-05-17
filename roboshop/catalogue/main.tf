@@ -36,6 +36,12 @@ provisioner "remote-exec" {
     ]
 }
 
+provisioner "file" {
+    when = create
+    source      = "templates/${var.COMPONENT}.service"
+    destination = "/etc/systemd/system/${var.COMPONENT}.service"
+  }
+
 provisioner "remote-exec" {
     when = create
     inline = [

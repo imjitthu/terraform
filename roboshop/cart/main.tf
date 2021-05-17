@@ -36,8 +36,8 @@ provisioner "remote-exec" {
 
 provisioner "file" {
     when = create
-    source      = "templates/cart.service"
-    destination = "/etc/systemd/system/cart.service"
+    source      = "templates/${var.COMPONENT}.service"
+    destination = "/etc/systemd/system/${var.COMPONENT}.service"
   }
 
 
