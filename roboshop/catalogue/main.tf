@@ -13,12 +13,6 @@ connection {
     password = "${var.PASSWORD}"
     }
 
-provisioner "file" {
-    when = create
-    source      = "files/"
-    destination = "/home/roboshop/${var.COMPONENT}"
-  }
-
 provisioner "remote-exec" {
     when = create
     inline = [
@@ -29,12 +23,13 @@ provisioner "remote-exec" {
     ]
 }
 
-provisioner "file" {
+provisioner "remote-exec" {
     when = create
-    source      = "templates/catalogue.service"
-    destination = "/home/roboshop/${var.COMPONENT}/catalogue.service"
-  }
-
+    inline = [
+      "cd /home/roboshop/${var.COMPONENT}",
+      "npm install --unsafe-perm",
+    ]
+}
 
 provisioner "remote-exec" {
     when = create
