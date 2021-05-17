@@ -99,6 +99,7 @@ pipeline {
                     ''' 
                     }
                     }
+        }
         stage('installing RabbitMQ server') {
             steps {
                 echo 'installing RabbitMQ Server'
