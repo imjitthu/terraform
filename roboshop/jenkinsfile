@@ -96,7 +96,7 @@ pipeline {
                 git 'https://github.com/imjitthu/terraform.git'
                 sh'''
                     echo 'installing frontend server'
-                    cd cd roboshop/frontend
+                    cd roboshop/frontend
                     terraform init
                     terraform apply -auto-approve
                 ''' }  
