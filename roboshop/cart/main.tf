@@ -12,17 +12,7 @@ connection {
     user = "root"
     password = "${var.PASSWORD}"
     }
-  # connection {
-  #   host = self.private_ip
-  # }
-provisioner "remote-exec" {
-    when = create
-    inline = [
-      "set-hostname ${var.COMPONENT}",
-      "mkdir -p /home/roboshop/${var.COMPONENT}",
-      "npm install --unsafe-perm",
-    ]
-}
+
 provisioner "file" {
     when = create
     source      = "files/"
@@ -30,10 +20,13 @@ provisioner "file" {
   }
 
 provisioner "remote-exec" {
-   inline = [
-     "cd /home/roboshop/${var.COMPONENT}",
-     "npm install --unsafe-perm",
-   ]
+    when = create
+    inline = [
+      "set-hostname ${var.COMPONENT}",
+      "mkdir -p /home/roboshop/${var.COMPONENT}",
+      "cd /home/roboshop/${var.COMPONENT}",
+      "npm install --unsafe-perm",
+    ]
 }
 
 provisioner "file" {
