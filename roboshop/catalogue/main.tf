@@ -18,10 +18,14 @@ provisioner "remote-exec" {
     inline = [
       "set-hostname ${var.COMPONENT}",
       "mkdir -p /home/roboshop/${var.COMPONENT}",
-      "cd /home/roboshop/${var.COMPONENT}",
-      "npm install --unsafe-perm",
     ]
 }
+
+provisioner "file" {
+    when = create
+    source      = "files/"
+    destination = "/home/roboshop/${var.COMPONENT}"
+  }
 
 provisioner "remote-exec" {
     when = create
