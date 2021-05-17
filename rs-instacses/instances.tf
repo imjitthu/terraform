@@ -1,4 +1,4 @@
-resource "aws_instance" "rs-instances" {
+resource "aws_instance" "instances" {
   for_each = toset(var.INSTANCES_LIST)
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
@@ -20,4 +20,9 @@ provisioner "remote-exec" {
      "yum install nginx -y",
     ]  
 }
+}
+
+output "instances" {
+  value = "aws_instance.instances.public_ip"
+  description = "Publuc IPs"
 }
