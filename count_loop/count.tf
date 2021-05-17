@@ -13,7 +13,7 @@ resource "aws_subnet" "subnets" {
   vpc_id = "${aws_vpc.VPC_Count.id}"
   cidr_block = "${element(var.SUBNET_CIDR, count.index)}"
   tags = {
-    Name = "subnet-1-Count-${count.index+1}"
+    Name = "subnet-count-${count.index+1}"
   }
 }
 
