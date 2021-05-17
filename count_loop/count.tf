@@ -7,8 +7,8 @@ resource "aws_vpc" "VPC_Count" {
 }
 
 resource "aws_subnet" "subnets" {
-  count = "${length(data.aws_availibility_zones.AV_ZONES.names)}"
-  availability_zone = "${element(data.aws_availability_zones.AV_ZONES.names, count.index)}"
+  count = "${length(data.aws_availibility_zones.AVZ.names)}"
+  availability_zone = "${element(data.aws_availability_zones.AVZ.names, count.index)}"
   #count = "${length(var.AV_ZONES)}"
   vpc_id = "${aws_vpc.VPC_Count.id}"
   cidr_block = "${element(var.SUBNET_CIDR, count.index)}"
