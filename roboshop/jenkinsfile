@@ -13,17 +13,32 @@ pipeline {
             parallel { //parallal 1
                 stage('installing catalogue') {
                     steps {
-                        echo 'installing catalogue'
-                        sh 'sleep 1s'
-                        
-                    }
-                    }
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    echo 'AWS Credentials'
+                    echo 'Downloading from GITHub'
+                    git 'https://github.com/imjitthu/terraform.git'
+                    sh'''
+                        echo 'installing catalogue server'
+                        cd terraform/catalogue
+                        terraform init
+                        terraform apply -auto-approve
+                    ''' }  
+                        }
+                        }
                 stage('installing cart') {
                      steps {
-                        echo 'installing cart'
-                        sh 'sleep 1s'
-                    }
-                    }
+                            withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    echo 'AWS Credentials'
+                    echo 'Downloading from GITHub'
+                    git 'https://github.com/imjitthu/terraform.git'
+                    sh'''
+                        echo 'installing catalogue server'
+                        cd terraform/cart
+                        terraform init
+                        terraform apply -auto-approve
+                    ''' }  
+                        }
+                        }
                 stage('installing shipping') {
                     steps {
                         echo 'installing shipping'
@@ -48,13 +63,13 @@ pipeline {
             parallel { //parallel 2
                 stage('installing MongoDB') {
                     steps {
-                       sh 'ansible-playbook -i /root/inv roboshop.yml -t mongodb'   
+                       sh 'sleep 1s'   
                         }
                         }
                         
                 stage('installing MySQL') {
                     steps('installing MySQL') {
-                       sh 'ansible-playbook -i /root/inv roboshop.yml -t mysql'
+                       sh 'sleep 1s'
                     }
                     }                    
                     } //parallel 2
@@ -72,11 +87,18 @@ pipeline {
                     }
         stage('installing frontend web-server') {
             steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                echo 'AWS Credentials'
+                echo 'Downloading from GITHub'
+                git 'https://github.com/imjitthu/terraform.git'
                 sh'''
-                echo 'installing frontend server'
-                sleep 1s
+                    echo 'installing frontend server'
+                    cd terraform/frontend
+                    terraform init
+                    terraform apply -auto-approve
                 ''' }  
                     }
+                    }  
         stage('Roboshop components installed successfully') {
             steps {
                 echo 'installing compononts finished'
