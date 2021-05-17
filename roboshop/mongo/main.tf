@@ -1,4 +1,4 @@
-resource "aws_instance" "cart" {
+resource "aws_instance" "mongo" {
   # aws_spot_instabce_request for spot instance
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
@@ -8,48 +8,48 @@ resource "aws_instance" "cart" {
   }
 connection {
     type = "ssh"
-    host = aws_instance.cart.public_ip
+    host = aws_instance.mongo.public_ip
     user = "root"
     password = "${var.PASSWORD}"
     }
 
 provisioner "file" {
     when = create
-    source      = "files/"
-    destination = "/home/roboshop/${var.COMPONENT}"
+    source      = "templates/mongo.repo"
+    destination = "/etc/yum.repos.d/mongo.repo"
   }
 
+  provisioner "file" {
+    when = create
+    source      = "files/"
+    destination = "/root"
+  }
 provisioner "remote-exec" {
     when = create
     inline = [
       "set-hostname ${var.COMPONENT}",
-      "mkdir -p /home/roboshop/${var.COMPONENT}",
-      "cd /home/roboshop/${var.COMPONENT}",
-      "npm install --unsafe-perm",
+      "yum install mongodb-org -y",
+      "sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf",
+      "mongo < catalogue.js",
+      "mongo < users.js",
     ]
 }
-
-provisioner "file" {
-    when = create
-    source      = "templates/cart.service"
-    destination = "/home/roboshop/${var.COMPONENT}/cart.service"
-  }
-
 
 provisioner "remote-exec" {
     when = create
     inline = [
       "systemctl daemon-reload",
-      "systemctl enable ${var.COMPONENT}",
-      "systemctl restart ${var.COMPONENT}",
+      "systemctl enable mongod",
+      "systemctl restart mongod",
     ]
 }
+}
 
-resource "aws_route53_record" "frontend" {
+resource "aws_route53_record" "mongo" {
   zone_id = "${var.R53_ZONE_ID}"
   name = "${var.COMPONENT}.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [ aws_instance.frontend.public_ip ]
+  records = [ aws_instance.mongo.public_ip ]
 }
 
