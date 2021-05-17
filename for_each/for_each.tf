@@ -1,5 +1,5 @@
 resource "aws_vpc" "VPC_FOR_EACH" {
-    for_each = var.CIDR_FOR_EACH
+    for_each = toset(var.CIDR_FOR_EACH)
     cidr_block = each.value
   
 }
