@@ -19,7 +19,7 @@ pipeline {
                     git 'https://github.com/imjitthu/terraform.git'
                     sh'''
                         echo 'installing catalogue server'
-                        cd terraform/roboshop/catalogue
+                        cd roboshop/catalogue
                         terraform init
                         terraform apply -auto-approve
                     ''' }  
@@ -96,7 +96,7 @@ pipeline {
                 git 'https://github.com/imjitthu/terraform.git'
                 sh'''
                     echo 'installing frontend server'
-                    cd cd terraform/roboshop/frontend
+                    cd cd roboshop/frontend
                     terraform init
                     terraform apply -auto-approve
                 ''' }  
