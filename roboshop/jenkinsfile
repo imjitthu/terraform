@@ -31,9 +31,9 @@ pipeline {
                             withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     echo 'AWS Credentials'
                     echo 'Downloading from GITHub'
+                    sh 'sleep 2s'
                     git 'https://github.com/imjitthu/terraform.git'
                     sh'''
-                        sleep 2s
                         echo 'installing redis server'
                         cd roboshop/redis
                         terraform init
