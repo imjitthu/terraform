@@ -48,13 +48,13 @@ pipeline {
             parallel { //parallel 2
                 stage('installing MongoDB') {
                     steps {
-                       sh 'ansiible-playbook -i /root/inv roboshop.yml -t mongodb'   
+                       sh 'ansible-playbook -i /root/inv roboshop.yml -t mongodb'   
                         }
                         }
                         
                 stage('installing MySQL') {
                     steps('installing MySQL') {
-                       sh 'ansiible-playbook -i /root/inv roboshop.yml -t mysql'
+                       sh 'ansible-playbook -i /root/inv roboshop.yml -t mysql'
                     }
                     }                    
                     } //parallel 2
