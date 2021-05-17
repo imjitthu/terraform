@@ -39,6 +39,7 @@ provisioner "remote-exec" {
       "systemctl restart ${var.COMPONENT}",
     ]
 }
+}
 
 resource "aws_route53_record" "catalogue" {
   zone_id = "${var.R53_ZONE_ID}"
@@ -47,4 +48,3 @@ resource "aws_route53_record" "catalogue" {
   ttl = "300"
   records = [ aws_instance.catalogue.public_ip ]
 }
-
