@@ -1,13 +1,14 @@
-resource "aws_instance" "frontend" {
+resource "aws_instance" "cart" {
+  # aws_spot_instabce_request for spot instance
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
-  #spot_type = "one-time"  aws_spot_instance_request
+  # spot_type = "one-time"  aws_spot_instance_request
   tags = {
-    "Name" = "${var.COMPONENT}-Web-Server"
+    "Name" = "${var.COMPONENT}-Server"
   }
 connection {
     type = "ssh"
-    host = aws_instance.frontend.public_ip
+    host = aws_instance.cart.public_ip
     user = "root"
     password = "${var.PASSWORD}"
     }
@@ -17,46 +18,40 @@ connection {
 provisioner "remote-exec" {
     when = create
     inline = [
-      "set-hostname frontend",
-      "yum install nginx -y",
+      "set-hostname ${var.COMPONENT}",
+      "mkdir -p /home/roboshop/${var.COMPONENT}",
+      "npm install --unsafe-perm",
     ]
 }
 provisioner "file" {
     when = create
     source      = "files/"
-    destination = "/usr/share/nginx/html"
-  }
-provisioner "file" {
-    source      = "templates/roboshop.conf"
-    destination = "/etc/nginx/default.d/roboshop.conf"
+    destination = "/home/roboshop/${var.COMPONENT}"
   }
 
-provisioner "file" {
-  source        = "templates/nginx.conf"
-  destination   = "/etc/nginx/nginx.conf"
+provisioner "remote-exec" {
+   inline = [
+     "cd /home/roboshop/${var.COMPONENT}",
+     "npm install --unsafe-perm",
+   ]
 }
+
+provisioner "file" {
+    when = create
+    source      = "templates/cart.service"
+    destination = "/home/roboshop/${var.COMPONENT}/cart.service"
+  }
+
+
 provisioner "remote-exec" {
     when = create
     inline = [
-      "systemctl enable nginx",
-      "systemctl restart nginx",
+      "systemctl daemon-reload",
+      "systemctl enable ${var.COMPONENT}",
+      "systemctl restart ${var.COMPONENT}",
     ]
 }
-provisioner "local-exec" {
-   command = "echo ${self.public_ip} > public_ip.txt"
-}
-  depends_on = [ aws_instance.frontend ]
-}
 
-
-output "EC2_Public_IP" {
-    value = aws_instance.frontend.public_ip
-    description = "Publisc IP of WorkStation"
-}
-output "EC2_instance_id" {
-  value       = aws_instance.frontend.id
-  description = "EC2 Instance ID"
-}
 resource "aws_route53_record" "frontend" {
   zone_id = "${var.R53_ZONE_ID}"
   name = "${var.COMPONENT}.${var.DOMAIN}"
