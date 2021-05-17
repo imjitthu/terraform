@@ -11,29 +11,30 @@ pipeline {
 
         stage('installing roboshop components') {
             parallel { //parallal 1
-                stage('installing catalogue') {
+                stage('installing mongo') {
                     steps {
                     withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     echo 'AWS Credentials'
                     echo 'Downloading from GITHub'
                     git 'https://github.com/imjitthu/terraform.git'
                     sh'''
-                        echo 'installing catalogue server'
-                        cd roboshop/catalogue
+                        echo 'installing mongo server'
+                        cd roboshop/mongo
                         terraform init
                         terraform apply -auto-approve
-                    ''' }  
-                        }
-                        }
-                stage('installing cart') {
+                    ''' 
+                    }  
+                    }
+                    }
+                stage('installing redis') {
                      steps {
                             withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     echo 'AWS Credentials'
                     echo 'Downloading from GITHub'
                     git 'https://github.com/imjitthu/terraform.git'
                     sh'''
-                        echo 'installing catalogue server'
-                        cd roboshop/cart
+                        echo 'installing redis server'
+                        cd roboshop/redis
                         terraform init
                         terraform apply -auto-approve
                     ''' }  
@@ -61,10 +62,18 @@ pipeline {
                     } //stage 
         stage('installing Databases') {
             parallel { //parallel 2
-                stage('installing MongoDB') {
+                stage('installing cart') {
                     steps {
-                       echo 'installing mongodb Server'
-                       sh 'sleep 1s'   
+                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        echo 'AWS Credentials'
+                        echo 'Downloading from GITHub'
+                        git 'https://github.com/imjitthu/terraform.git'
+                        sh'''
+                            echo 'installing cart server'
+                            cd roboshop/cart
+                            terraform init
+                            terraform apply -auto-approve
+                        '''  
                         }
                         }
                         
@@ -76,10 +85,18 @@ pipeline {
                     }                    
                     } //parallel 2
                     } //stage
-        stage('installing Redis cache server') {
+        stage('installing catalogue') {
             steps {
-                echo 'installing Redis Server'
-                sh 'sleep 1s'
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    echo 'AWS Credentials'
+                    echo 'Downloading from GITHub'
+                    git 'https://github.com/imjitthu/terraform.git'
+                    sh'''
+                        echo 'installing catalogue server'
+                        cd roboshop/catalogue
+                        terraform init
+                        terraform apply -auto-approve
+                    ''' 
                     }
                     }
         stage('installing RabbitMQ server') {
