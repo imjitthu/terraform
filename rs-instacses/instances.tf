@@ -5,11 +5,10 @@ resource "aws_instance" "rs-instances" {
   tags = {
     Name = each.value
   }
-}
-
 connection {
   type = "ssh"
   user = "root"
   password = "${var.PASSWORD}"
   host = self.private_ip
+}
 }
