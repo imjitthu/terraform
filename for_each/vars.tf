@@ -1,4 +1,4 @@
 variable "VPC_FOR_EACH" {
-    type = "list"
+    type = "list(string)"
     default = ""
 }
