@@ -83,6 +83,7 @@ pipeline {
                        sh 'sleep 1s'
                     }
                     }                    
+                    } 
                     } //parallel 2
                     } //stage
         stage('installing catalogue') {
@@ -125,4 +126,5 @@ pipeline {
                   }
                   }
         }
-        }
+    }
+}
