@@ -21,8 +21,3 @@ provisioner "remote-exec" {
     ]  
 }
 }
-
-output "Instance_PIPs" {
-  value = aws_instance.instances[frontend].public_ip
-  value = aws_instance.instances[frontend].private_ip
-}
