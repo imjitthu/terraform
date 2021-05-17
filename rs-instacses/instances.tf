@@ -22,10 +22,6 @@ provisioner "remote-exec" {
 }
 }
 
-output "instance_private_ip_addresses" {
-  # Result is a map from instance id to private IP address, such as:
-  #  {"i-1234" = "192.168.1.2", "i-5678" = "192.168.1.5"}
-  value = {
-    for instance in aws_instance.instances:
-    instance.id => instance.public_ip
-  }
+output "Instance PIPs" {
+  value = aws_instance.*.public_ip
+}
