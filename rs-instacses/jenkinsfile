@@ -3,9 +3,9 @@ pipeline {
 
     options { disableConcurrentBuilds() }
 
-    //tools {
+    // tools {
     //    ansible 'ansible'
-    //}
+    // }
 
     stages {
 
