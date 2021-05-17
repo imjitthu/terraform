@@ -23,5 +23,5 @@ provisioner "remote-exec" {
 }
 
 output "Instance_PIPs" {
-  value = aws_instance.instances[3].public_ip
+  value = aws_instance.instances[count.index].public_ip
 }
