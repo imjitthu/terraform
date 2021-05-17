@@ -10,7 +10,7 @@ pipeline {
     stages {
 
         stage('installing roboshop components') {
-            parallel {
+            parallel { //parallal 1
                 stage('installing catalogue') {
                     steps {
                         echo 'installing catalogue'
@@ -45,22 +45,13 @@ pipeline {
                     } //parallel  1 
                     } //stage 
         stage('installing Databases') {
-            parallel {
+            parallel { //parallel 2
                 stage('installing MongoDB') {
                     steps {
-                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        echo 'AWS Credentials'
-                        echo 'Downloading from GITHub'
-                        git 'https://github.com/imjitthu/terraform.git'
-                        sh'''
-                        echo 'installing MySQL server'
-                        cd terraform/mysql
-                        terraform init
-                        terraform apply -auto-approve
-                    ''' }  
+                          
                         }
                         }
-                        }
+                        
                 stage('installing MySQL') {
                     steps('installing MySQL') {
                         echo 'installing MySQL'
