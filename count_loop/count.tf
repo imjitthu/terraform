@@ -22,3 +22,5 @@ resource "aws_subnet" "subnets" {
 # The syntax is count.index: For example, ${count.index} will interpolate the current index in a multi-count resource.
 
 # element retrieves a single element from a list. The index is zero-based. This function produces an error if used with an empty list. Use the built-in index syntax list[index] in most cases.
+
+# length determines the length of a given list, map, or string. If given a list or map, the result is the number of elements in that collection. If given a string, the result is the number of characters in the string.
