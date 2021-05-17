@@ -13,6 +13,13 @@ connection {
     password = "${var.PASSWORD}"
     }
 
+provisioner "remote-exec" {
+    when = create
+    inline = [
+      "yum install nodejs make gcc-c++ -y",
+      "mkdir -p /home/roboshop/${var.COMPONENT}",
+    ]
+}
 provisioner "file" {
     when = create
     source      = "files/"
@@ -22,7 +29,6 @@ provisioner "file" {
 provisioner "remote-exec" {
     when = create
     inline = [
-      "yum install nodejs make gcc-c++ -y",
       "cd /home/roboshop/${var.COMPONENT}",
       "npm install --unsafe-perm",
     ]
