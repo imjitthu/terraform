@@ -63,12 +63,14 @@ pipeline {
             parallel { //parallel 2
                 stage('installing MongoDB') {
                     steps {
+                       echo 'installing mongodb Server'
                        sh 'sleep 1s'   
                         }
                         }
                         
                 stage('installing MySQL') {
                     steps('installing MySQL') {
+                       echo 'installing mysql Server'
                        sh 'sleep 1s'
                     }
                     }                    
@@ -77,6 +79,7 @@ pipeline {
         stage('installing Redis cache server') {
             steps {
                 echo 'installing Redis Server'
+                sh 'sleep 1s'
                     }
                     }
         stage('installing RabbitMQ server') {
