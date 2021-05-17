@@ -9,4 +9,4 @@ resource "aws_vpc" "VPC_FOR_EACH" {
 
 # for_each (meta argument) helps in creating multiple resources with multiple values at single time.
 
-# toset used for list variable ex: for_each = toset(var.CIDR_LIST)
+# toset function used for list variable ex: for_each = toset(var.CIDR_LIST)
