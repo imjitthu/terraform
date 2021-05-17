@@ -41,6 +41,7 @@ provisioner "remote-exec" {
       "systemctl restart ${var.COMPONENT}",
     ]
 }
+}
 
 resource "aws_route53_record" "frontend" {
   zone_id = "${var.R53_ZONE_ID}"
@@ -49,4 +50,3 @@ resource "aws_route53_record" "frontend" {
   ttl = "300"
   records = [ aws_instance.frontend.public_ip ]
 }
-

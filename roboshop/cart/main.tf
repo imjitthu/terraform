@@ -12,6 +12,7 @@ connection {
     user = "root"
     password = "${var.PASSWORD}"
     }
+}
 
 provisioner "file" {
     when = create
@@ -42,7 +43,6 @@ provisioner "remote-exec" {
       "systemctl enable ${var.COMPONENT}",
       "systemctl restart ${var.COMPONENT}",
     ]
-}
 }
 
 resource "aws_route53_record" "cart" {
