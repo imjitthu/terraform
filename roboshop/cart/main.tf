@@ -51,4 +51,3 @@ resource "aws_route53_record" "cart" {
   ttl = "300"
   records = [ aws_instance.cart.public_ip ]
 }
-
