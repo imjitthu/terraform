@@ -23,6 +23,7 @@ provisioner "remote-exec" {
 }
 
 output "instances" {
+  for_each = toset(var.INSTANCES_LIST)
   value = aws_instance.instances[each.key].public_ip
   description = "Publuc IPs"
 }
