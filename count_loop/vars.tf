@@ -7,7 +7,7 @@ variable "VPC_CIDR" { default = "190.160.0.0/16"}
 variable "SUBNET_CIDR" {}
 
 #Manual Availability Zones List
-# variable "AVZ" {
+# variable "avz" {
 #     type = "list"
 #     default = [
 #         "us-east-1a", 
@@ -20,5 +20,5 @@ variable "SUBNET_CIDR" {}
 # }
 
 #Get Availability Zones from DataSources
-data "data.aws_availability_zones" "_AVZ" {}
+data "data.aws_availability_zones" "avz" {}
 
