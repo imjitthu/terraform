@@ -1,4 +1,4 @@
-resource "aws_instance" "cart" {
+resource "aws_instance" "frontend" {
   # aws_spot_instabce_request for spot instance
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
@@ -8,7 +8,7 @@ resource "aws_instance" "cart" {
   }
 connection {
     type = "ssh"
-    host = aws_instance.cart.public_ip
+    host = aws_instance.frontend.public_ip
     user = "root"
     password = "${var.PASSWORD}"
     }
@@ -22,17 +22,16 @@ provisioner "file" {
 provisioner "remote-exec" {
     when = create
     inline = [
-      "set-hostname ${var.COMPONENT}",
-      "mkdir -p /home/roboshop/${var.COMPONENT}",
-      "cd /home/roboshop/${var.COMPONENT}",
-      "npm install --unsafe-perm",
+      "yum install nginx -y",
+      "systemctl enable nginx",
+      "systemctl restart nginx",
     ]
 }
 
 provisioner "file" {
     when = create
-    source      = "templates/cart.service"
-    destination = "/home/roboshop/${var.COMPONENT}/cart.service"
+    source      = "files/cart.service"
+    destination = ""
   }
 
 
