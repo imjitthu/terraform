@@ -32,15 +32,9 @@ provisioner "remote-exec" {
       "mongo < catalogue.js",
       "mongo < users.js",
       "sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf",
-    ]
-}
-
-provisioner "remote-exec" {
-    when = create
-    inline = [
       "systemctl daemon-reload",
       "systemctl enable mongod",
-      "systemctl restart mongod",
+      "systemctl restart mongod",      
     ]
 }
 }
