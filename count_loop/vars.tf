@@ -7,7 +7,7 @@ variable "VPC_CIDR" { default = "190.160.0.0/16"}
 variable "SUBNET_CIDR" {}
 
 #Manual Availability Zones List
-# variable "AV_Zones" {
+# variable "AVZ" {
 #     type = "list"
 #     default = [
 #         "us-east-1a", 
