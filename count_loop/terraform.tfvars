@@ -6,8 +6,3 @@ SUBNET_CIDR = [
     "190.160.5.0/24",
     "190.160.6.0/24",
 ]
-
-#Get Availability Zones from DataSources
-data "aws_availability_zones" "AVZ" {
-    state = "available"
-}
