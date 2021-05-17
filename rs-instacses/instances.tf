@@ -14,7 +14,7 @@ connection {
 }
 
 provisioner "remote-exec" {
-  when = creates
+  when = create
   inline = [
      "set-hostname frontend",
      "yum install nginx -y",
