@@ -23,6 +23,5 @@ provisioner "remote-exec" {
 }
 
 output "Instance_PIPs" {
-  for_each = toset(var.INSTANCES_LIST)
-  value = aws_instance.instances[each.value].public_ip
+  value = aws_instance.instances.public_ip
 }
