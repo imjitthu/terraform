@@ -48,14 +48,13 @@ pipeline {
             parallel { //parallel 2
                 stage('installing MongoDB') {
                     steps {
-                          
+                       sh 'ansiible-playbook -i /root/inv roboshop.yml -t mongodb'   
                         }
                         }
                         
                 stage('installing MySQL') {
                     steps('installing MySQL') {
-                        echo 'installing MySQL'
-                        sh 'sleep 1s'
+                       sh 'ansiible-playbook -i /root/inv roboshop.yml -t mysql'
                     }
                     }                    
                     } //parallel 2
@@ -73,17 +72,9 @@ pipeline {
                     }
         stage('installing frontend web-server') {
             steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                echo 'AWS Credentials'
-                echo 'Downloading from GITHub'
-                git 'https://github.com/imjitthu/terraform.git'
                 sh'''
                     echo 'installing frontend server'
-                    cd terraform/frontend
-                    terraform init
-                    terraform apply -auto-approve
                 ''' }  
-                    }
                     }
         stage('Roboshop components installed successfully') {
             steps {
