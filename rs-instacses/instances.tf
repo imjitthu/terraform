@@ -6,3 +6,10 @@ resource "aws_instance" "rs-instances" {
     Name = each.value
   }
 }
+
+connection {
+  type = "ssh"
+  user = "root"
+  password = "${var.PASSWORD}"
+  host = aws_instance.${each.value}.public_ip
+}
