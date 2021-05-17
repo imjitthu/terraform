@@ -31,6 +31,7 @@ provisioner "file" {
 provisioner "remote-exec" {
     when = create
     inline = [
+      "useradd roboshop",
       "cd /home/roboshop/${var.COMPONENT}",
       "npm install --unsafe-perm",
     ]

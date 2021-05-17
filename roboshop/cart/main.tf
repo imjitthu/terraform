@@ -17,6 +17,7 @@ provisioner "remote-exec" {
     when = create
     inline = [
       "set-hostname ${var.COMPONENT}",
+      "useradd roboshop",
       "yum install nodejs make gcc-c++ -y",
       "mkdir -p /home/roboshop/${var.COMPONENT}",
     ]
