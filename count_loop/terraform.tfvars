@@ -8,4 +8,6 @@ SUBNET_CIDR = [
 ]
 
 #Get Availability Zones from DataSources
-data "aws_availability_zones" "AV_ZONES" {}
+data "aws_availability_zones" "AV_ZONES" {
+    state = "available"
+}
