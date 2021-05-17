@@ -43,6 +43,7 @@ provisioner "remote-exec" {
       "systemctl restart ${var.COMPONENT}",
     ]
 }
+}
 
 resource "aws_route53_record" "cart" {
   zone_id = "${var.R53_ZONE_ID}"
