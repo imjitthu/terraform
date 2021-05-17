@@ -7,6 +7,6 @@ resource "aws_vpc" "VPC_FOR_EACH" {
 }
 
 
-# for_each (meta argument) helps in creating multiple resources with multiple values at single time.
+# for_each is a meta-argument and can be used with modules and with every resource type. For_each accepts a map or a set of strings, and creates an instance for each item in that map or set.
 
-# toset function used for list variable ex: for_each = toset(var.CIDR_LIST)
+# toset: Pass a list value to toset to convert it to a set, which will remove any duplicate elements and discard the ordering of the elements. Ex: for_each = toset(var.CIDR_LIST)
