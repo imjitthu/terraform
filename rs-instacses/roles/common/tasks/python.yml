@@ -1,0 +1,6 @@
+- name: Installing python modules
+  shell: 
+    yum install python36, gcc , python3-devel -t
+
+# - name: Install NodeJS
+#    shell: yum install python36 gcc python3-devel -y

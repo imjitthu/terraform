@@ -1,0 +1,103 @@
+pipeline {
+    agent any
+
+    options { disableConcurrentBuilds() }
+
+//    tools {
+//        terraform 'terraform'
+//    }
+
+    stages {
+
+        stage('installing roboshop components') {
+            parallel {
+                stage('installing catalogue') {
+                    steps {
+                        echo 'installing catalogue'
+                        sh 'sleep 1s'
+                        
+                    }
+                    }
+                stage('installing cart') {
+                     steps {
+                        echo 'installing cart'
+                        sh 'sleep 1s'
+                    }
+                    }
+                stage('installing shipping') {
+                    steps {
+                        echo 'installing shipping'
+                        sh 'sleep 1s'
+                    }
+                    }
+                stage('installing user') {
+                    steps {
+                        echo 'installing user'
+                        sh 'sleep 1s'
+                    }
+                    }
+                stage('installing payment') {
+                    steps {
+                        echo 'installing payment'
+                        sh 'sleep 1s'
+                    }
+                    }
+                    } //parallel  1 
+                    } //stage 
+        stage('installing Databases') {
+            parallel {
+                stage('installing MongoDB') {
+                    steps {
+                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        echo 'AWS Credentials'
+                        echo 'Downloading from GITHub'
+                        git 'https://github.com/imjitthu/terraform.git'
+                        sh'''
+                        echo 'installing MySQL server'
+                        cd terraform/mysql
+                        terraform init
+                        terraform apply -auto-approve
+                    ''' }  
+                        }
+                        }
+                        }
+                stage('installing MySQL') {
+                    steps('installing MySQL') {
+                        echo 'installing MySQL'
+                        sh 'sleep 1s'
+                    }
+                    }                    
+                    } //parallel 2
+                    } //stage
+        stage('installing Redis cache server') {
+            steps {
+                echo 'installing Redis Server'
+                    }
+                    }
+        stage('installing RabbitMQ server') {
+            steps {
+                echo 'installing RabbitMQ Server'
+                sh 'sleep 1s'
+                    }
+                    }
+        stage('installing frontend web-server') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                echo 'AWS Credentials'
+                echo 'Downloading from GITHub'
+                git 'https://github.com/imjitthu/terraform.git'
+                sh'''
+                    echo 'installing frontend server'
+                    cd terraform/frontend
+                    terraform init
+                    terraform apply -auto-approve
+                ''' }  
+                    }
+                    }
+        stage('Roboshop components installed successfully') {
+            steps {
+                echo 'installing compononts finished'
+                  }
+                  }
+        }
+        }
