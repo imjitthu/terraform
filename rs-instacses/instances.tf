@@ -29,6 +29,3 @@ output "instance_private_ip_addresses" {
     for instance in aws_instance.instances:
     instance.id => instance.public_ip
   }
-
-
-# "${element(var.SUBNET_CIDR, count.index)}
