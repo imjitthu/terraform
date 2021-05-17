@@ -25,6 +25,3 @@ provisioner "remote-exec" {
 output "Instance_PIPs" {
   value = "${aws_instance.instances.public_ip}"
 }
-
-
-# ${element(data.aws_availability_zones.avz.names, count.index)}"
