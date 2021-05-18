@@ -15,7 +15,7 @@ connection {
 
   provisioner "local-exec" {
       when = create
-      command = "${var.COMPONENT}.${var.DOMAIN} >> /var/lib/jenkins/.ssh/known_hosts"
+      command = "echo ${var.COMPONENT}.${var.DOMAIN} >> /var/lib/jenkins/.ssh/known_hosts"
       #command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml"
   }
 }
