@@ -24,6 +24,7 @@ provisioner "file" {
 }
 provisioner "remote-exec" {
     inline = [
+      "set-hostnamme mysql",
       "yum remove mariadb-libs -y",
       "yum install mysql-community-server -y",
       "systemctl enable mysqld",
