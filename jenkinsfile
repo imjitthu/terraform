@@ -21,7 +21,7 @@ pipeline { //pipeline
                         echo 'installing mysql server'
                         cd roboshop/roles/mysql
                         terraform init
-                        terraform apply -auto-approve
+                        terraform destroy -auto-approve
                     '''
                     //ansiblePlaybook colorized: true, credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: 'mysql.jithendar.com,', playbook: 'roboshop/mysql.yml'
                 } 
