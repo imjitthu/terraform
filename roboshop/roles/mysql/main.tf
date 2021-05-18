@@ -24,7 +24,7 @@ resource "aws_route53_record" "mysql" {
   name = "${var.COMPONENT}.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [ aws_instance.mysql.public_ip ]
+  records = [ aws_instance.mysql.private_ip ]
 }
 
 output "mysql_server_public_ip" {
