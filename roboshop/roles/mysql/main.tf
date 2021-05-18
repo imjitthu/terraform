@@ -15,7 +15,8 @@ connection {
 
  provisioner "local-exec" {
      when = create
-     command = "ansiblePlaybook colorized: true, credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: '${aws_instance.mysql.private_ip}', playbook: 'roboshop/mysql.yml'"
+     command = "ansible-playbook -i '${aws_instance.mysql.private_ip}', -u root -K ${var.PASSWORD} roboshop/mysql.yml"
+     #command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml"
  }
 }
 
@@ -32,4 +33,3 @@ output "mysql_server_public_ip" {
 }
 
 
-#command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml"
