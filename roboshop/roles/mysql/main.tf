@@ -13,11 +13,11 @@ connection {
     password = "${var.PASSWORD}"
     }
 
-#  provisioner "local-exec" {
-#      when = create
-#      command = "ansible-playbook -i ${aws_instance.mysql.private_ip}, -u root -K ${var.PASSWORD} roboshop/mysql.yml"
-#      command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml"
-#  }
+  provisioner "local-exec" {
+      when = create
+      command = "${var.COMPONENT}.${var.DOMAIN} >> /var/lib/jenkins/.ssh/known_hosts"
+      #command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml"
+  }
 }
 
 resource "aws_route53_record" "mysql" {
