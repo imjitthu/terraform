@@ -8,6 +8,7 @@ pipeline { //pipeline
         parallel { //parallel 1
             stage ('Setup Mongo Server') { //mongo stage
                 steps { //mongo steps
+                echo 'Installing mongo'
                 // withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                 //     echo 'Downloading from GITHub'
                 //     git 'https://github.com/imjitthu/terraform.git'
@@ -23,7 +24,6 @@ pipeline { //pipeline
             }
             stage ('Setup MySql Server') { //mysql stage
                 steps { //mysql steps
-                echo 'Installing mysql'
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     echo 'AWS Credentials'
                     echo 'Downloading from GITHub'
