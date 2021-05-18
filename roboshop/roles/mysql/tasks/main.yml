@@ -43,3 +43,5 @@
 
 - name: Load Schema
   shell: mysql -u root -p'{{MYSQL_PASS}}' </tmp/shipping.sql
+
+  #my sql task list
