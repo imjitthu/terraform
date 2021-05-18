@@ -23,10 +23,8 @@ pipeline { //pipeline
                         terraform init
                         terraform apply -auto-approve
                         sleep 3s
-                        cd -
-                        sh roboshop/mkinv.sh
                     '''
-                    //ansiblePlaybook credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: '${aws_instance.mysql.private_ip},', playbook: 'roboshop/mysql.yml'
+                    ansiblePlaybook credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: 'mysql.jithendar.com,', playbook: 'roboshop/mysql.yml'
                 } 
                 } //mysql steps
             } //mysql stage
