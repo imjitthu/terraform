@@ -18,7 +18,7 @@ pipeline { //pipeline
                 //         terraform apply -auto-approve
                 //         sleep 3s
                 //     '''
-                }
+                // }
                 } //mongo steps
             }
             stage ('Setup MySql Server') { //mysql stage
