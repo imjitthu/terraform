@@ -12,12 +12,11 @@ connection {
     user = "root"
     password = "${var.PASSWORD}"
     }
-#}
 
-# provisioner "local-exec" {
-#     when = create
-#     command = "ansible-playbook -i ${aws_instance.mysql.private_ip}, -u root -K ${var.PASSWORD} roboshop.yml -t mysql"
-# }
+provisioner "local-exec" {
+    when = create
+    command = "echo ${aws_instance.mysql.private_ip} >> /root/inv"
+}
 }
 
 resource "aws_route53_record" "mysql" {
