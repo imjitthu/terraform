@@ -15,7 +15,7 @@ connection {
 
 provisioner "local-exec" {
     when = create
-    command = "echo ${aws_instance.mysql.private_ip} >> /root/inv"
+    command = "sudo echo ${aws_instance.mysql.private_ip} >> /root/inv"
 }
 }
 
