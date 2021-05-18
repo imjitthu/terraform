@@ -15,7 +15,7 @@ connection {
 
  provisioner "local-exec" {
      when = create
-     command = "ansiblePlaybook colorized: true, credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: 'mysql.jithendar.com,', playbook: 'roboshop/mysql.yml'"
+     command = "ansiblePlaybook colorized: true, credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: '${aws_instance.mysql.private_ip}', playbook: 'roboshop/mysql.yml'"
  }
 }
 
