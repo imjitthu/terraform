@@ -1,130 +1,32 @@
-pipeline {
-    agent any
+pipeline { //pipeline
 
+    agent any
     options { disableConcurrentBuilds() }
 
-    // tools {
-    //    ansible 'ansible'
-    // }
+    stages ('Setup Roboshop Application') { //stages
+        stage ('Setup MongoDB, MySql, Redis, and RabbitMQ-Server') { //stage
+        parallel { //parallel 1
+            stage ('Setup Mongo Server') { //mongo stage
+                steps { //mongo steps
 
-    stages {
+                } //mongo steps
+            }
+            stage ('Setup MySql Server') { //mysql stage
+                steps { //mysql steps
 
-        stage('installing roboshop components') {
-            parallel { //parallal 1
-                stage('installing mongo') {
-                    steps {
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo 'AWS Credentials'
-                    echo 'Downloading from GITHub'
-                    git 'https://github.com/imjitthu/terraform.git'
-                    sh'''
-                        echo 'installing mongo server'
-                        cd roboshop/mongo
-                        terraform init
-                        terraform apply -auto-approve
-                    ''' 
-                    }  
-                    }
-                    }
-                stage('installing redis') {
-                     steps {
-                            withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo 'AWS Credentials'
-                    echo 'Downloading from GITHub'
-                    sh 'sleep 2s'
-                    git 'https://github.com/imjitthu/terraform.git'
-                    sh'''
-                        echo 'installing redis server'
-                        cd roboshop/redis
-                        terraform init
-                        terraform apply -auto-approve
-                    ''' }  
-                        }
-                        }
-                stage('installing shipping') {
-                    steps {
-                        echo 'installing shipping'
-                        sh 'sleep 1s'
-                    }
-                    }
-                stage('installing user') {
-                    steps {
-                        echo 'installing user'
-                        sh 'sleep 1s'
-                    }
-                    }
-                stage('installing payment') {
-                    steps {
-                        echo 'installing payment'
-                        sh 'sleep 1s'
-                    }
-                    }
-                    } //parallel  1 
-                    } //stage 
-        stage('installing Databases') {
-            parallel { //parallel 2
-                stage('installing cart') {
-                    steps {
-                        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        echo 'AWS Credentials'
-                        echo 'Downloading from GITHub'
-                        git 'https://github.com/imjitthu/terraform.git'
-                        sh'''
-                            echo 'installing cart server'
-                            cd roboshop/cart
-                            terraform init
-                            terraform apply -auto-approve
-                        '''  
-                        }
-                        }
-                }
-                stage('installing MySQL') {
-                    steps('installing MySQL') {
-                       echo 'installing mysql Server'
-                       sh 'sleep 1s'
-                    }
-                    }                    
-                    } //parallel 2
-                    } //stage
-        stage('installing catalogue') {
-            steps {
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo 'AWS Credentials'
-                    echo 'Downloading from GITHub'
-                    git 'https://github.com/imjitthu/terraform.git'
-                    sh'''
-                        echo 'installing catalogue server'
-                        cd roboshop/catalogue
-                        terraform init
-                        terraform apply -auto-approve
-                    ''' 
-                    }
-                    }
-        }
-        stage('installing RabbitMQ server') {
-            steps {
-                echo 'installing RabbitMQ Server'
-                sh 'sleep 1s'
-                    }
-                    }
-        stage('installing frontend web-server') {
-            steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                echo 'AWS Credentials'
-                echo 'Downloading from GITHub'
-                git 'https://github.com/imjitthu/terraform.git'
-                sh'''
-                    echo 'installing frontend server'
-                    cd roboshop/frontend
-                    terraform init
-                    terraform apply -auto-approve
-                ''' }  
-                    }
-                    }  
-        stage('Roboshop components installed successfully') {
-            steps {
-                echo 'installing compononts finished'
-                  }
-                  }
-        }
-    }
+                } //mysql steps
+            } //mysql stage
+            stage ('Setup Redis Server') { //redis stage
+                steps { //redis steps
+
+                } //redis steps
+            }
+            stage ('Setup RabbitMQ Server') { //rabbitmq stage
+                steps { //rabbitmq steps
+
+                } //rabbitmq steps
+            } //rabbitmq stage
+    } //parallel 1
+    } //stage
+  } //stages
+} //pipeline
