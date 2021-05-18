@@ -8,7 +8,7 @@ resource "aws_instance" "mysql" {
   }
 connection {
     type = "ssh"
-    host = aws_instance.cart.private_ip
+    host = aws_instance.mysql.private_ip
     user = "root"
     password = "${var.PASSWORD}"
     }
@@ -16,7 +16,7 @@ connection {
 
 provisioner "local-exec" {
     when = create
-    command = "ansible-playbook -i ${aws_instance.name.private_ip}, -u root -K ${var.PASSWORD} roboshop.yml -t mysql"
+    command = "ansible-playbook -i ${aws_instance.mysql.private_ip}, -u root -K ${var.PASSWORD} roboshop.yml -t mysql"
 }
 }
 
@@ -25,7 +25,7 @@ resource "aws_route53_record" "mysql" {
   name = "${var.COMPONENT}.${var.DOMAIN}"
   type = "A"
   ttl = "300"
-  records = [ aws_instance.frontend.public_ip ]
+  records = [ aws_instance.mysql.public_ip ]
 }
 
 output "mysql_server_public_ip" {
