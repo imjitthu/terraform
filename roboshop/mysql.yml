@@ -8,7 +8,7 @@
 
      - name: Load MySQL Role
        import_role:
-        name: roles/mysql
+        name: mysql
         #when: COMPONENT == "mysql.jithendar.com"
         tags:
           - mysql
