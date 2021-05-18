@@ -27,7 +27,7 @@ resource "aws_route53_record" "mysql" {
   records = [ aws_instance.frontend.public_ip ]
 }
 
-output "mysql server public ip" {
+output "mysql_server_public_ip" {
   value = aws_instance.mysql.public_ip
 }
 
