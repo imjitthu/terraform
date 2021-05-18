@@ -40,4 +40,4 @@ pipeline { //pipeline
     } //parallel 1 
   } //stage
 } //stages
-} //pipeline
+} //pipeline end
