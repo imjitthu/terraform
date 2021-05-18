@@ -22,6 +22,7 @@ pipeline { //pipeline
                         cd roboshop/roles/mysql
                         terraform init
                         terraform apply -auto-approve
+                        sleep 10s
                     '''
                     ansiblePlaybook credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: 'mysql.jithendar.com,', playbook: 'roboshop/mysql.yml'
                 } 
