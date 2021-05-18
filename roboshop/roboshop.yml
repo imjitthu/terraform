@@ -16,7 +16,7 @@
     - name: Load MySQL Role
       import_role:
         name: roles/mysql
-      when: component == "mysql"
+      #when: component == "mysql"
       tags:
         - mysql
 
@@ -62,15 +62,12 @@
       tags:
         - frontend
 
-
     - name: Load Redis Role
       import_role:
        name: redis
       when: component == "redis"
       tags:
        - redis
-
-
 
     - name: Load RabbitMQ Role
       import_role:
