@@ -1,4 +1,4 @@
-resource "aws_instance" "cart" {
+resource "aws_instance" "mysql" {
   # aws_spot_instabce_request for spot instance
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
@@ -8,44 +8,18 @@ resource "aws_instance" "cart" {
   }
 connection {
     type = "ssh"
-    host = aws_instance.cart.public_ip
+    host = aws_instance.cart.private_ip
     user = "root"
     password = "${var.PASSWORD}"
     }
-
-provisioner "file" {
-    when = create
-    source      = "files/"
-    destination = "/home/roboshop/${var.COMPONENT}"
-  }
-
-provisioner "remote-exec" {
-    when = create
-    inline = [
-      "set-hostname ${var.COMPONENT}",
-      "mkdir -p /home/roboshop/${var.COMPONENT}",
-      "cd /home/roboshop/${var.COMPONENT}",
-      "npm install --unsafe-perm",
-    ]
 }
 
-provisioner "file" {
+provisioner "local-exec" {
     when = create
-    source      = "templates/cart.service"
-    destination = "/home/roboshop/${var.COMPONENT}/cart.service"
-  }
-
-
-provisioner "remote-exec" {
-    when = create
-    inline = [
-      "systemctl daemon-reload",
-      "systemctl enable ${var.COMPONENT}",
-      "systemctl restart ${var.COMPONENT}",
-    ]
+    command = "ansible-playbook -i ${aws_instance.name.private_ip}, -u root -K ${var.PASSWORD} roboshop.yml -t mysql"
 }
 
-resource "aws_route53_record" "frontend" {
+resource "aws_route53_record" "mysql" {
   zone_id = "${var.R53_ZONE_ID}"
   name = "${var.COMPONENT}.${var.DOMAIN}"
   type = "A"
@@ -53,3 +27,9 @@ resource "aws_route53_record" "frontend" {
   records = [ aws_instance.frontend.public_ip ]
 }
 
+output "mysql server public ip" {
+  value = aws_instance.mysql.public_ip
+}
+
+
+#command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml"
