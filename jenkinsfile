@@ -23,7 +23,7 @@ pipeline { //pipeline
                         terraform init
                         terraform apply -auto-approve
                     '''
-                    ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansible', playbook: 'terraform/roboshop/roboshop.yml', tags: 'mysql'
+                    ansiblePlaybook credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: '/root/inv', playbook: 'roboshop/roboshop.yml', tags: 'msql'
                 } 
                 } //mysql steps
             } //mysql stage
