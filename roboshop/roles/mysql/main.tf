@@ -13,10 +13,10 @@ connection {
     password = "${var.PASSWORD}"
     }
 
-# provisioner "local-exec" {
-#     when = create
-#     command = "command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml""
-# }
+ provisioner "local-exec" {
+     when = create
+     command = "ansiblePlaybook colorized: true, credentialsId: 'DevOps321', disableHostKeyChecking: true, installation: 'ansible', inventory: 'mysql.jithendar.com,', playbook: 'roboshop/mysql.yml'"
+ }
 }
 
 resource "aws_route53_record" "mysql" {
