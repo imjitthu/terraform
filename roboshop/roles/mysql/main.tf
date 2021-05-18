@@ -15,7 +15,7 @@ connection {
 
 # provisioner "local-exec" {
 #     when = create
-#     command = "sudo echo ${aws_instance.mysql.private_ip} >> /root/inv"
+#     command = "command = "ansible-playbook -i ${aws_instance.name.private_ip}, --private-key ${local.private_key_path} roboshop.yml""
 # }
 }
 
