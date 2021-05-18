@@ -13,10 +13,10 @@ connection {
     password = "${var.PASSWORD}"
     }
 
-provisioner "local-exec" {
-    when = create
-    command = "sudo echo ${aws_instance.mysql.private_ip} >> /root/inv"
-}
+# provisioner "local-exec" {
+#     when = create
+#     command = "sudo echo ${aws_instance.mysql.private_ip} >> /root/inv"
+# }
 }
 
 resource "aws_route53_record" "mysql" {
