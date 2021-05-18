@@ -7,7 +7,7 @@
   tasks:
 
      - name: Load MySQL Role
-        import_role:
+       import_role:
         name: roles/mysql
         #when: COMPONENT == "mysql.jithendar.com"
         tags:
