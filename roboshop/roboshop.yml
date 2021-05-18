@@ -15,7 +15,7 @@
     
     - name: Load MySQL Role
       import_role:
-        name: roboshop/roles/mysql
+        name: roles/mysql
       #when: component == "mysql"
       tags:
         - mysql
