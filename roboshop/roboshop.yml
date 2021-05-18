@@ -16,7 +16,7 @@
     - name: Load MySQL Role
       import_role:
         name: roles/mysql
-      when: component == "mysql"
+      when: component == "mysql.{{DOMAIN}}"
       tags:
         - mysql
 
