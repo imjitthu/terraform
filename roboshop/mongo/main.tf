@@ -29,7 +29,7 @@ provisioner "remote-exec" {
     inline = [
       "set-hostname ${var.COMPONENT}",
       "yum install mongodb-org -y",
-      "sh files/mongoconf.sh",
+      "sh /root/mongoconf.sh",
       "systemctl daemon-reload",
       "systemctl enable mongod",
       "systemctl restart mongod",      
