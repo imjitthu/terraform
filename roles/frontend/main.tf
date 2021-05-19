@@ -9,7 +9,7 @@ resource "aws_instance" "frontend" {
   }
 
 provisioner "local-exec" {
-  command = "pwd; ls; ansible-playbook -i ${aws_instance.frontend.private_ip}, ansible_user=root ansible_password=DevOps321 ${var.PASSWORD} /var/lib/jenkins/workspace/rs-tf-app/${var.COMPONENT}.yml"
+  command = "ansible-playbook -i ${aws_instance.frontend.private_ip}, ansible_user=root ansible_password=DevOps321 ${var.PASSWORD} /var/lib/jenkins/workspace/rs-tf-app/${var.COMPONENT}.yml"
 }
 }
 
