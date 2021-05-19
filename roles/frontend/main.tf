@@ -2,13 +2,14 @@ resource "aws_instance" "frontend" {
   # aws_spot_instabce_request for spot instance
   ami = "${var.AMI}"
   instance_type = "${var.INSTANCE_TYPE}"
+  key_name = "test"
   # spot_type = "one-time"  aws_spot_instance_request
   tags = {
     "Name" = "${var.COMPONENT}-Server"
   }
 
 provisioner "local-exec" {
-  command = "pwd; ls; ansible-playbook -i '${aws_instance.frontend.private_ip}', -u 'root' -k '${var.PASSWORD}' /var/lib/jenkins/workspace/rs-tf-app/${var.COMPONENT}.yml"
+  command = "pwd; ls; ansible-playbook -i ${aws_instance.frontend.private_ip}, -u root --ask-pass ${var.PASSWORD} /var/lib/jenkins/workspace/rs-tf-app/${var.COMPONENT}.yml"
 }
 }
 
