@@ -8,7 +8,7 @@
 #   }
 
 provisioner "local-exec" {
-  command = "ansible-playbook -i ${aws_instance.frontend.private_ip}, --private-key=test.pem ${var.COMPONENT}.yml"
+  command = "pwd; ls; ansible-playbook -i 3.237.21.106, --private-key=test.pem ${var.COMPONENT}.yml"
 }
 # }
 
