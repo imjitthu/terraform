@@ -44,7 +44,7 @@ provisioner "remote-exec" {
 
 provisioner "local-exec" {
   when = create
-  inline = "ansilble-playbook -i ${aws_instance.frontend.private_ip}," -u root -p "${var.PASSWORD}" 
+  inline = "ansilble-playbook -i ${aws_instance.frontend.private_ip}," -u root -p "${var.PASSWORD}" frontend.yml"
 }
 }
 
