@@ -4,37 +4,38 @@ pipeline { //pipeline
     options { disableConcurrentBuilds() }
 
     stages ('Setup Roboshop Application') { //stages
-        stage ('Setup MongoDB, MySql, Redis, and RabbitMQ-Server') { //stage
+        stage ('Setup Frontend, MySql, Redis, and RabbitMQ-Server') { //stage
         parallel { //parallel 1
-            stage ('Setup Mongo Server') { //mongo stage
+            stage ('Setup Frontend Server') { //mongo stage
                 steps { //mongo steps
-                echo 'Installing mongo'
-                // withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                //     echo 'Downloading from GITHub'
-                //     git 'https://github.com/imjitthu/terraform.git'
-                //     sh'''
-                //         echo 'installing mongo server'
-                //         cd roboshop/mongo
-                //         terraform init
-                //         terraform apply -auto-approve
-                //         sleep 3s
-                //     '''
-                // }
+                echo 'Installing Frontend'
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                     echo 'Downloading from GITHub'
+                     git 'https://github.com/imjitthu/terraform.git'
+                     sh'''
+                         echo 'installing frontend server'
+                         cd roles/frontend
+                         terraform init
+                         terraform apply -auto-approve
+                         sleep 3s
+                     '''
+                     }
                 } //mongo steps
             }
             stage ('Setup MySql Server') { //mysql stage
                 steps { //mysql steps
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    echo 'AWS Credentials'
-                    echo 'Downloading from GITHub'
-                    git 'https://github.com/imjitthu/terraform.git'
-                    sh'''
-                        echo 'installing mysql server'
-                        cd roboshop/mysql
-                        terraform init
-                        terraform apply -auto-approve
-                        sleep 3s
-                    '''                } 
+                echo 'installing redis'
+                // withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                //     echo 'AWS Credentials'
+                //     echo 'Downloading from GITHub'
+                //     git 'https://github.com/imjitthu/terraform.git'
+                //     sh'''
+                //         echo 'installing mysql server'
+                //         cd roboshop/mysql
+                //         terraform init
+                //         terraform apply -auto-approve
+                //         sleep 3s
+                //     '''                } 
                 } //mysql steps
             } //mysql stage
             stage ('Setup Redis Server') { //redis stage

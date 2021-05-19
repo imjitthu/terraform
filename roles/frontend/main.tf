@@ -41,6 +41,11 @@ provisioner "remote-exec" {
       "systemctl restart nginx",
     ]
 }
+
+provisioner "local-exec" {
+  when = create
+  inline = "ansilble-playbook -i ${aws_instance.frontend.private_ip}," -u root -p "${var.PASSWORD}" 
+}
 }
 
 resource "aws_route53_record" "frontend" {
