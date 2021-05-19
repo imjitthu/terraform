@@ -13,17 +13,18 @@ pipeline { //pipeline
             stage ('Setup Frontend Server') { //mongo stage
                 steps { //mongo steps
                 echo 'Installing Frontend'
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                     echo 'Downloading from GITHub'
-                     git 'https://github.com/imjitthu/terraform.git'
-                     sh'''
-                         echo 'installing frontend server'
-                         cd roles/frontend
-                         terraform init
-                         terraform apply -auto-approve
-                         sleep 3s
-                     '''
-                     }
+                sh "ansible-playbook"
+                // withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                //      echo 'Downloading from GITHub'
+                //      git 'https://github.com/imjitthu/terraform.git'
+                //      sh'''
+                //          echo 'installing frontend server'
+                //          cd roles/frontend
+                //          terraform init
+                //          terraform apply -auto-approve
+                //          sleep 3s
+                //      '''
+                //      }
                 } //mongo steps
             }
             stage ('Setup MySql Server') { //mysql stage
