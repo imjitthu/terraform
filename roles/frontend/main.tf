@@ -25,3 +25,7 @@ resource "aws_route53_record" "frontend" {
   ttl = "300"
   records = [ aws_instance.frontend.public_ip ]
 }
+
+output "Frontend_PIP" {
+  value = aws_instance.frontend.public_ip
+}
