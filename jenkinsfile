@@ -3,9 +3,9 @@ pipeline { //pipeline
     agent any
     options { disableConcurrentBuilds() }
 
-    tools {
-    ansible 'ansibletool'
-    }
+    // tools {
+    // ansible 'ansibletool'
+    // }
 
     stages ('Setup Roboshop Application') { //stages
         stage ('Setup Frontend, MySql, Redis, and RabbitMQ-Server') { //stage
