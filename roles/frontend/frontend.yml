@@ -7,7 +7,7 @@
   tasks:
     
     
-    - name: Load Frontend Role
+    - name: Load frontend Role
       import_role:
         name: frontend
       #when: component == "frontend"
