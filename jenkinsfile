@@ -21,6 +21,7 @@ pipeline { //pipeline
                           cd roles/frontend
                           terraform init
                           terraform apply -auto-approve
+                          cd -
                           sleep 3s
                       '''
                       }
