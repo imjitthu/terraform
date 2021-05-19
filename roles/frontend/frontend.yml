@@ -3,16 +3,9 @@
   vars:
     DOMAIN: jithendar.com
   become: yes
-  # Become is nothing but a sudo in CLI, Also this become can be used in task level also
+  
   tasks:
     
     - name: Load frontend Role
       import_role:
         name: frontend
-
-    # - name: Load frontend Role
-    #   import_role:
-    #     name: frontend
-    #   #when: component == "frontend"
-    #   tags:
-    #     - frontend
