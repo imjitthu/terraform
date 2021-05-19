@@ -6,12 +6,6 @@ resource "aws_instance" "frontend" {
   tags = {
     "Name" = "${var.COMPONENT}-Server"
   }
-# connection {
-#     type = "ssh"
-#     host = aws_instance.frontend.public_ip
-#     user = "root"
-#     password = "${var.PASSWORD}"
-#     }
 
 provisioner "local-exec" {
   command = "ansible-playbook -i ${aws_instance.frontend.private_ip}, --private-key=test.pem ${var.COMPONENT}.yml"
