@@ -13,36 +13,6 @@ resource "aws_instance" "frontend" {
 #     password = "${var.PASSWORD}"
 #     }
 
-# provisioner "remote-exec" {
-#     when = create
-#     inline = [
-#       "set-hostname ${var.COMPONENT}",
-#       "yum install nginx -y",
-#     ]
-# }
-
-# provisioner "file" {
-#     when = create
-#     source      = "files/"
-#     destination = "/usr/share/nginx/html"
-#   }
-
-# provisioner "file" {
-#     when = create
-#     source      = "templates/roboshop.conf"
-#     destination = "/etc/nginx/default.d/roboshop.conf"
-#   }
-
-# provisioner "remote-exec" {
-#     when = create
-#     inline = [
-#       "systemctl daemon-reload",
-#       "systemctl enable nginx",
-#       "systemctl restart nginx",
-#     ]
-# }
-
-
 provisioner "local-exec" {
   command = "ansible-playbook -i ${aws_instance.frontend.private_ip}, -u root -k ${var.PASSWORD} ${var.COMPONENT}.yml"
 }
