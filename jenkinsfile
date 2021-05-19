@@ -12,8 +12,7 @@ pipeline { //pipeline
         parallel { //parallel 1
             stage ('Setup Frontend Server') { //mongo stage
                 steps { //mongo steps
-                sh "ansible-playbook"
-                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awskey', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                       echo 'Downloading from GITHub'
                       git 'https://github.com/imjitthu/terraform.git'
                       sh'''
