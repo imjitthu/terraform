@@ -2,9 +2,9 @@ pipeline { //pipeline
 
     agent any
     options { disableConcurrentBuilds() }
-    
+
     tools {
-    terraform 'terraform14'
+    ansible 'ansible'
     }
 
     stages ('Setup Roboshop Application') { //stages
