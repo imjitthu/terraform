@@ -9,8 +9,6 @@
     - name: Load frontend Role
       import_role:
         name: frontend
-      tags:
-        - frontend
 
     # - name: Load frontend Role
     #   import_role:
