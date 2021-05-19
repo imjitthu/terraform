@@ -5,11 +5,11 @@
   become: yes
   # Become is nothing but a sudo in CLI, Also this become can be used in task level also
   tasks:
-
     
-    - name: Load MySQL Role
+    
+    - name: Load Frontend Role
       import_role:
-        name: mysql
-      #when: component == "mysql"
+        name: frontend
+      #when: component == "frontend"
       tags:
-        - mysql
+        - frontend
