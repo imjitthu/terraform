@@ -4,7 +4,7 @@ pipeline { //pipeline
     options { disableConcurrentBuilds() }
 
     tools {
-    ansible 'ansible'
+    ansible 'ansibletool'
     }
 
     stages ('Setup Roboshop Application') { //stages
