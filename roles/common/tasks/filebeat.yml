@@ -1,0 +1,24 @@
+- name: Download and Install Elastic Public Signing Key
+  shell: sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+  ignore_errors: yes
+
+- name: Elastic REPO File
+  copy: 
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elactic.repo
+
+- name: Installing FileBeat
+  yum:
+    name: filebeat
+    state: present
+
+- name: Update Filebeat Configuration
+  copy:
+    src: filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
+
+- name: Enable FileBeat Service
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    name: filebeat
