@@ -14,7 +14,7 @@ resource "aws_instance" "frontend" {
 #     }
 
 provisioner "local-exec" {
-  command = "ansible-playbook -i ${aws_instance.frontend.private_ip}, -u root -k ${var.PASSWORD} ${var.COMPONENT}.yml"
+  command = "ansible-playbook -i ${aws_instance.frontend.private_ip}, --private-key=test.pem ${var.COMPONENT}.yml"
 }
 }
 
