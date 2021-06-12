@@ -10,6 +10,7 @@ resource "aws_instance" "instance" {
 
 
 resource "aws_route53_record" "roboshop" {
+  dynamic "routes" {
   for_each   = var.COMPONENT
   iterator   = var.COMPONENT
   zone_id    = data.aws_route53_zone.jithendar.zone_id
@@ -18,3 +19,5 @@ resource "aws_route53_record" "roboshop" {
   ttl        = "300"
   records    = "${element(aws_instance.instance, index)}".private_ip
 }
+}
+
