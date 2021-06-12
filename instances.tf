@@ -4,9 +4,11 @@ resource "aws_spot_instance_request" "instance" {
   spot_price = "0.03"
   instance_type = "${var.INSTANCE_TYPE}"
   user_data = "set hostname ${element(var.COMPONENT, count.index)}"
-  tags = {
-    Name = "${var.ENV}"
-    #Name = "${element(var.COMPONENT, count.index)}"-"${var.ENV} + 1"
+
+  tag {
+    key = "param1"
+    value = "${var.COMPONENT}"
+    propagate_at_launch = true
   }
 }
 
