@@ -18,3 +18,7 @@ resource "aws_route53_record" "roboshop" {
   records    = ["${element(aws_instance.instance, count.index)}".private_ip]
 }
 
+provisioner "local-exec" {
+  command = "${element(aws_instance.instance, count.index)}"
+}
+
