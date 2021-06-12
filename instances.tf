@@ -9,5 +9,5 @@ resource "aws_instance" "instance" {
 }
 
 output "Component_Names" {
-  value = element(var.COMPONENT, count.index)
+  value = element(var.COMPONENT)
 }
