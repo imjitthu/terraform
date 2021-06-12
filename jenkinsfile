@@ -17,6 +17,7 @@ pipeline {
                     sh "terraform plan" 
                     } 
                     if (params.tfaction == 'apply') {
+                    sh "terraform init"
                     sh "terraform apply -auto-approve"
                     } 
                     if (params.tfaction == 'destroy') {
