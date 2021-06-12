@@ -13,5 +13,6 @@ output "Private_IPs" {
 }
 
 output "Component_Names" {
-  value = element(var.COMPONENT, *)
+  value = aws_instance.instance.*
+  #value = element(var.COMPONENT, 0)
 }
