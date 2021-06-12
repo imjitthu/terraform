@@ -10,6 +10,7 @@ pipeline {
         stage ('Creating infra for RoboShop') {
             steps {
                 sh '''
+                terraform init
                 terraform apply -auto-approve
                 '''
                 }
