@@ -12,6 +12,10 @@ output "ami" {
   value = aws_instance.instance[*].ami
 }
 
+output "ami" {
+  value = var.COMPONENT
+}
+
 # resource "aws_route53_record" "roboshop" {
 #     for_each   = toset(var.COMPONENT)
 #     allow_overwrite = true
