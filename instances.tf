@@ -8,10 +8,6 @@ resource "aws_instance" "instance" {
   }
 }
 
-output "Private_IPs" {
-  value = join(",", aws_instance.instance.*.private_ip)
-}
-
 output "Component_Names" {
-  value = join(",", aws_instance.instance.*.tags.Name)
+  value = element(var.COMPONENT, count.index
 }
