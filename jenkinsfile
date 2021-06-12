@@ -2,9 +2,9 @@ pipeline {
 
     agent any
 
-    tools {
-        terraform 'terraformtool'
-    }
+    parameters {
+    choice(name: 'tfaction', choices: ['init', 'plan', 'apply', 'destroy'], description: 'Pick any action')
+               }
 
     stages {
         stage ('Creating infra for RoboShop') {
