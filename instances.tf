@@ -9,9 +9,10 @@ resource "aws_instance" "instance" {
 }
 
 resource "null_resource" "make_inv" {
+  when = 
   count   = length(aws_instance.instance)
   provisioner "local-exec" {
-    command = "rm -rf /tmp/inv.txt ; echo ${element(aws_instance.instance, count.index).private_ip} ${element(var.COMPONENT, count.index)} >> /tmp/inv.txt"
+    command = "echo > /tmp/inv.txt ; echo ${element(aws_instance.instance, count.index).private_ip} ${element(var.COMPONENT, count.index)} >> /tmp/inv.txt"
   }
 }
 
