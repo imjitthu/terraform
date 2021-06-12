@@ -16,5 +16,5 @@ resource "aws_route53_record" "roboshop" {
   name    = "${element(var.COMPONENT)}".data.aws_route53_zone.jithendar.name
   type    = "A"
   ttl     = "300"
-  records = "${element(aws_instance)}".private_ip
+  records = "${element(aws_instance.instance)}".private_ip
 }
