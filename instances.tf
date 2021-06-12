@@ -10,9 +10,10 @@ resource "aws_instance" "instance" {
 
 
 resource "aws_route53_record" "roboshop" {
-  dynamic "routes" {
+  dynamic route {
+    count      = length(var.COMPONENT)
     for_each   = var.COMPONENT
-    iterator   = var.COMPONENT
+    #iterator   = var.COMPONENT
     zone_id    = data.aws_route53_zone.jithendar.zone_id
     name       = "${element(var.COMPONENT, index)}".data.aws_route53_zone.jithendar.name
     type       = "A"
