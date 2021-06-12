@@ -19,11 +19,19 @@ output "Component" {
 resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)
   allow_overwrite = true
+  name       = "${element(var.COMPONENT, count.index)}.${data.aws_route53_zone.jithendar.name}"
   zone_id    = data.aws_route53_zone.jithendar.zone_id
-  name       = "${element(var.COMPONENT, count.index)}"+.data.aws_route53_zone.jithendar.name
   #.data.aws_route53_zone.jithendar.name
   type       = "A"
   ttl        = "300"
   records    = ["${element(var.COMPONENT, count.index)}"]
 }
+
+# resource "aws_route53_record" "jithendar" {
+#   name          = "${var.COMPONENT}.${data.aws_route53_zone.jithendar.name}"
+#   type          = "A"
+#   ttl           = "300"
+#   zone_id       = data.aws_route53_zone.jithendar.zone_id
+#   records       = [aws_instance.cart.private_ip]
+# }
 
