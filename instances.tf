@@ -9,5 +9,5 @@ resource "aws_instance" "instance" {
 }
 
 output "PublicIP" {
-  value = index(var.COMPONENT, 0)
+  value = aws_instance.instance[0].public_ip
 }
