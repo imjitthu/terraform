@@ -20,7 +20,7 @@ resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)
   allow_overwrite = true
   zone_id    = data.aws_route53_zone.jithendar.zone_id
-  name       = "${element(var.COMPONENT, count.index)}".data.aws_route53_zone.jithendar.name
+  name       = "${element(var.COMPONENT, count.index)}"+.data.aws_route53_zone.jithendar.name
   #.data.aws_route53_zone.jithendar.name
   type       = "A"
   ttl        = "300"
