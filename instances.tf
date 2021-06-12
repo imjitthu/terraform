@@ -9,7 +9,7 @@ resource "aws_instance" "instance" {
 }
 
 output "Private_IPs" {
-  value = aws_instance.instance.*.private_ip - element(var.COMPONENT, count.index)
+  value = aws_instance.instance.*.private_ip
 }
 
 output "Component_Names" {
