@@ -37,7 +37,15 @@ pipeline {
                 expression {params.tfaction == 'apply'}
                 }
             steps {
-                sh "git clone https://github.com/imjitthu/Ansible.git"
+                script {
+                if [ $? == 0 ]
+                then
+                echo "Ansible Repository Found"
+                else
+                git clone https://github.com/imjitthu/Ansible.git
+                fi
+                }
+                }
                 ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: 'inv', playbook: 'Ansible/roboshop.yml'
                 }
                 }
