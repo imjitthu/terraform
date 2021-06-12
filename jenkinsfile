@@ -9,10 +9,22 @@ pipeline {
     stages {
         stage ('Creating infra for RoboShop') {
             steps {
-                sh '''
-                terraform init
-                terraform destroy -auto-approve
-                '''
+                script {
+                    if (params.tfaction == 'init') {
+                    sh "terraform ${params.tfaction}"
+                    } 
+                    if (params.tfaction == 'plan') {
+                    sh "terraform plan" 
+                    } 
+                    if (params.tfaction == 'apply') {
+                    sh "terraform apply -auto-approve" 
+                    } 
+                    if (params.tfaction == 'destroy') {
+                    sh "terraform destroy -auto-approve"   
+                    }                         
+                        }
+                    }
+                }
                 }
             }
         }
