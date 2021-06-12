@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh '''
                 which bash
-                id
+                whoami
                 terrafrom apply -auto-approve
                 '''
                 }
