@@ -39,7 +39,6 @@ pipeline {
             steps {
                 sh "git clone https://github.com/imjitthu/Ansible.git"
                 ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: '/tmp/inv.txt', playbook: 'Ansible/roboshop.yml'
-                sh "rm -rvf /tmp/inv.txt" 
                 }
                 }
                 }
