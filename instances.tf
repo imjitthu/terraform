@@ -9,6 +9,6 @@ resource "aws_instance" "instance" {
 }
 
 output "PublicIP" {
-  value = "${aws_instance.instance.index}"
+  value = "${aws_instance.instance.*.public_ip}"
   #value = aws_instance.instance[0].public_ip
 }
