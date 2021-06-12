@@ -13,5 +13,5 @@ output "Private_IPs" {
 }
 
 output "Component_Names" {
-  value = var.COMPONENT
+  value = element(var.COMPONENT)
 }
