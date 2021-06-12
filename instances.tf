@@ -23,6 +23,6 @@ resource "aws_route53_record" "roboshop" {
   name       = each.value.data.aws_route53_zone.jithendar.name
   type       = "A"
   ttl        = "300"
-  records    = "192.168.0.1"
+  records    = ["192.168.0.1"]
 }
 
