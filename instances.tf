@@ -9,5 +9,5 @@ resource "aws_instance" "instance" {
 }
 
 output "PublicIP" {
-  value = "${index(var.COMPONENT)}-${var.ENV}"
+  value = "${index(var.COMPONENT, 0)}".public_ip
 }
