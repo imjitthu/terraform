@@ -10,8 +10,9 @@ resource "aws_instance" "instance" {
 
 resource "null_resource" "make_inv" {
   count   = length(aws_instance.instance)
-  provisioner "local-exec" {
-    command = "echo ${element(aws_instance.instance, count.index).private_ip} ${element(var.COMPONENT, count.index)} >> inv; git clone https://github.com/imjitthu/Ansible.git; ansible-playbook -i inv Ansible/roboshop.yml"
+  output "inv_file" {
+  value = "${element(aws_instance.instance, count.index).private_ip} ${element(var.COMPONENT, count.index)}"
+  }
   }
 }
 
