@@ -10,9 +10,7 @@ pipeline {
         stage ('Creating infra for RoboShop') {
             steps {
                 sh '''
-                which bash
-                whoami
-                terrafrom apply -auto-approve
+                terraform apply -auto-approve
                 '''
                 }
             }
