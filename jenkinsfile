@@ -31,6 +31,9 @@ pipeline {
                     }
                   }
         stage ('Installing Components') {
+            when {
+                expression {params.params.tfaction == 'apply'}
+                }
             steps {
                 ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: '/tmp/inv.txt', playbook: 'ansible/roboshop.yml'
                 sh "rm -rvf /tmp/inv.txt" 
