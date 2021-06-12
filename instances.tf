@@ -8,9 +8,8 @@ resource "aws_instance" "instance" {
   }
 
 provisioner "local-exec" {
-    command = "${element(aws_instance.instance, count.index)}".private_ip
+    command = "echo ${element(aws_instance.instance, count.index).private_ip} >> /tmp/inv.txt"
   }
-
 }
 
 
