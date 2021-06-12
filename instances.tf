@@ -19,6 +19,6 @@ resource "aws_route53_record" "roboshop" {
 }
 
 provisioner "local-exec" {
-  command = "${element(aws_instance.instance, count.index)}"
-}
+    command = "echo ${element(aws_instance.instance, count.index)}"
+  }
 
