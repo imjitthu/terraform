@@ -16,3 +16,8 @@ data "aws_ami" "AMI" {
         values = ["Centos-7-DevOps-Practice"]
     }
 }
+
+data "aws_route53_zone" "jithendar" {
+  name = "jithendar.com"
+  private_zone = false
+}
