@@ -12,6 +12,7 @@ resource "aws_instance" "instance" {
 resource "aws_route53_record" "roboshop" {
   dynamic route {
     for_each   = var.COMPONENT
+    allow_overwrite = true
     zone_id    = data.aws_route53_zone.jithendar.zone_id
     name       = "${element(var.COMPONENT)}".data.aws_route53_zone.jithendar.name
     type       = "A"
