@@ -22,7 +22,7 @@ resource "aws_route53_record" "roboshop" {
   count = length(aws_instance.instance)
   allow_overwrite = true
   zone_id    = data.aws_route53_zone.jithendar.zone_id
-  name       = "${toset(aws_instance.instance, count.index)}".data.aws_route53_zone.jithendar.name
+  name       = "${toset(aws_instance.instance)}".data.aws_route53_zone.jithendar.name
   type       = "A"
   ttl        = "300"
   records    = ["192.168.0.1"]
