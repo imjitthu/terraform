@@ -9,7 +9,7 @@ resource "aws_instance" "instance" {
 }
 
 output "ami" {
-  value = aws_instance.instance[*].ami
+  value = aws_instance.instance[*].private_ip
 }
 
 output "Component" {
@@ -23,6 +23,6 @@ output "Component" {
 #     name       = each.value.data.aws_route53_zone.jithendar.name
 #     type       = "A"
 #     ttl        = "300"
-#     records    = "${element(aws_instance[0])}".private_ip
+#     records    = "${element(aws_instance.instance[*])}".private_ip
 # }
 
