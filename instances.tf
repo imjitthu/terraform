@@ -1,12 +1,12 @@
 resource "aws_instance" "name" {
   count = "${length(var.COMPONENT)}"
   #ami = "${var.AMI}"
-  ami = "ami-059e6ca6474628ef0"
+  ami = data.aws_ami.AMI
   #spot_price = "0.03"
   instance_type = "${var.INSTANCE_TYPE}"
   user_data = "set hostname ${element(var.COMPONENT, count.index)}"
   tags = {
-      Name = "${element(var.COMPONENT, count.index)}"
+      Name = "${element(var.COMPONENT, count.index)}"-"${var.ENV}"
   }
 }
 

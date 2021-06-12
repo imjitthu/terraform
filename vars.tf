@@ -12,7 +12,7 @@ variable "COMPONENT" {
         "frontend"
     ]
     }
-variable "AMI" {}
+    
 variable "INSTANCE_TYPE" {}
 variable "REGION" {}
 variable "ENV" {}
