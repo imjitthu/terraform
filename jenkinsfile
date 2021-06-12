@@ -14,6 +14,7 @@ pipeline {
                     sh "terraform ${params.tfaction}"
                     } 
                     if (params.tfaction == 'plan') {
+                    sh "terraform init"
                     sh "terraform plan" 
                     } 
                     if (params.tfaction == 'apply') {
@@ -21,9 +22,11 @@ pipeline {
                     sh "terraform apply -auto-approve"
                     } 
                     if (params.tfaction == 'destroy') {
+                    sh "terraform init"
                     sh "terraform destroy -auto-approve"   
                     }
                     if (params.tfaction == 'validate') {
+                    sh "terraform init"
                     sh "terraform validate"   
                     }                         
                     }
