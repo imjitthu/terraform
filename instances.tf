@@ -8,7 +8,7 @@ resource "aws_instance" "instance" {
   }
 }
 
-output {
+output "ami" {
   value = aws_instance.instance[0].ami
 }
 # resource "aws_route53_record" "roboshop" {
