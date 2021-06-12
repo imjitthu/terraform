@@ -17,12 +17,13 @@ output "Component" {
 }
 
 resource "aws_route53_record" "roboshop" {
-    count =    length(var.COMPONENT)
-    allow_overwrite = true
-    zone_id    = data.aws_route53_zone.jithendar.zone_id
-    name       = "${element(var.COMPONENT, count.index)}.data.aws_route53_zone.jithendar.name"
-    type       = "A"
-    ttl        = "300"
-    records    = ["${element(aws_instance.instance[*], count.index)}.private_ip"]
+  for_each = var.COMPONENT
+  #count =    length(var.COMPONENT)
+  allow_overwrite = true
+  zone_id    = data.aws_route53_zone.jithendar.zone_id
+  name       = each.value.data.aws_route53_zone.jithendar.name
+  type       = "A"
+  ttl        = "300"
+  records    = each.value.private_ip
 }
 
