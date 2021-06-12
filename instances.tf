@@ -8,6 +8,10 @@ resource "aws_instance" "instance" {
   }
 }
 
-output "PublicIP" {
+output "Private_IPs" {
   value = aws_instance.instance.*.private_ip
+}
+
+output "Component_Names" {
+  value = var.COMPONENT
 }
