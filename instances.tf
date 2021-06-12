@@ -20,7 +20,7 @@ resource "aws_route53_record" "roboshop" {
   for_each = toset(var.COMPONENT)
   allow_overwrite = true
   zone_id    = data.aws_route53_zone.jithendar.zone_id
-  name       = each.key.data.aws_route53_zone.jithendar.name
+  name       = each.data.aws_route53_zone.jithendar.name
   type       = "A"
   ttl        = "300"
   records    = ["192.168.0.1"]
