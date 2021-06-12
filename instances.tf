@@ -9,7 +9,7 @@ resource "aws_instance" "instance" {
 }
 
 output "Private_IPs" {
-  value = aws_instance.instance.*.private_ip
+  value = join(",", aws_instance.instance.*.private_ip)
 }
 
 output "Component_Names" {
