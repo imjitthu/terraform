@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    tools {
+        terrafrom 'terraformtool'
+        }
+        
     stages {
         stage ('Creating infra for RoboShop') {
             steps {
