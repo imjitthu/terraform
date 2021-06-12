@@ -13,5 +13,5 @@ output "Private_IPs" {
 }
 
 output "Component_Names" {
-  value = aws_instance.instance.*.tags
+  value = aws_instance.instance.*.tags.Name
 }
