@@ -8,7 +8,6 @@ resource "aws_instance" "instance" {
   }
 
 provisioner "local-exec" {
-  count   = length(aws_instance.instance)
   command = "echo ${element(aws_instance.instance, count.index).private_ip} >> /tmp/inv.txt"
   }
 }
