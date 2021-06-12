@@ -13,5 +13,5 @@ output "Private_IPs" {
 }
 
 output "Component_Names" {
-  value = element(var.COMPONENT, count.index)
+  value = element(var.COMPONENT.index)
 }
