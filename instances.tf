@@ -8,7 +8,7 @@ resource "aws_instance" "instance" {
   }
 
 provisioner "local-exec" {
-    command = "${element(aws_instance.instance, count.index)}"
+    command = "${element(aws_instance.instance, count.index)}".private_ip
   }
 
 }
