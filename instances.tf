@@ -6,7 +6,7 @@ resource "aws_spot_instance_request" "instance" {
   user_data = "set hostname ${element(var.COMPONENT, count.index)}"
 
   tag {
-    key = "param1"
+    key = "param"
     value = "${var.COMPONENT}"
     propagate_at_launch = true
   }
