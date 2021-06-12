@@ -2,7 +2,7 @@ resource "aws_instance" "instance" {
   count   = length(var.COMPONENT)
   ami = data.aws_ami.AMI.id
   instance_type = "${var.INSTANCE_TYPE}"
-  user_data = "set hostname ${element(var.COMPONENT, count.index)}"
+  #user_data = "set hostname ${element(var.COMPONENT, count.index)}"
   tags = {
     Name = "${element(var.COMPONENT, count.index)}-${var.ENV}"
   }
@@ -18,7 +18,8 @@ output "Component" {
 
 resource "aws_route53_record" "roboshop" {
   #for_each = toset(var.COMPONENT)
-  count = element(var.COMPONENT, count.index)
+  #count = element(var.COMPONENT, count.index)
+  count = length(aws_instance.instance)
   allow_overwrite = true
   zone_id    = data.aws_route53_zone.jithendar.zone_id
   name       = "${element(var.COMPONENT, count.index)}".data.aws_route53_zone.jithendar.name
