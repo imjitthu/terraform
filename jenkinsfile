@@ -22,10 +22,8 @@ pipeline {
                     if (params.tfaction == 'destroy') {
                     sh "terraform destroy -auto-approve"   
                     }                         
-                        }
                     }
-                }
+                    }
+                  }
                 }
             }
-        }
-    }
