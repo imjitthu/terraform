@@ -6,14 +6,15 @@ resource "aws_instance" "instance" {
   tags = {
     Name = "${element(var.COMPONENT, count.index)}-${var.ENV}"
   }
+}
 
 resource "null_resource" "make_inv" {
   count   = length(aws_instance.instance)
   output "inv_file" {
   value = "${element(aws_instance.instance, count.index).private_ip} ${element(var.COMPONENT, count.index)}"
   }
-  }
 }
+
 
 resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)
