@@ -12,7 +12,7 @@ output "ami" {
   value = aws_instance.instance[*].ami
 }
 
-output "ami" {
+output "Component" {
   value = var.COMPONENT
 }
 
