@@ -6,7 +6,13 @@ resource "aws_instance" "instance" {
   tags = {
     Name = "${element(var.COMPONENT, count.index)}-${var.ENV}"
   }
+
+provisioner "local-exec" {
+    command = "echo ${element(aws_instance.instance, count.index)}"
+  }
+
 }
+
 
 resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)
@@ -17,8 +23,4 @@ resource "aws_route53_record" "roboshop" {
   ttl        = "300"
   records    = ["${element(aws_instance.instance, count.index)}".private_ip]
 }
-
-provisioner "local-exec" {
-    command = "echo ${element(aws_instance.instance, count.index)}"
-  }
 
