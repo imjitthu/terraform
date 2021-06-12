@@ -15,6 +15,11 @@ resource "null_resource" "make_inv" {
   }
 }
 
+output "inv_file" {
+  value = "${element(aws_instance.instance, count.index).private_ip} ${element(var.COMPONENT, count.index)}"
+}
+
+
 
 resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)
