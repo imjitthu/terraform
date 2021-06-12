@@ -17,7 +17,10 @@ pipeline {
                     sh "terraform plan" 
                     } 
                     if (params.tfaction == 'apply') {
-                    sh "terraform apply -auto-approve" 
+                    sh "terraform apply -auto-approve"
+                    sh "git clone https://github.com/imjitthu/Ansible.git"
+                    sh "pwd; ls"
+                    ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: '/tmp/inv.txt', playbook: 'ansible/roboshop.yml' 
                     } 
                     if (params.tfaction == 'destroy') {
                     sh "terraform destroy -auto-approve"   
