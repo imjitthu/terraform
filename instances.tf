@@ -7,3 +7,7 @@ resource "aws_instance" "instance" {
     Name = "${element(var.COMPONENT, count.index)}-${var.ENV}"
   }
 }
+
+output "PublicIP" {
+  value = "${element(var.COMPONENT, count.index)}-${var.ENV}"
+}
