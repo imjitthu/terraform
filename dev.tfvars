@@ -1,5 +1,4 @@
-variable "COMPONENT" {
-    default = [
+COMPONENT = [
         "mysql",
         "mongodb",
         "redis",
@@ -11,8 +10,8 @@ variable "COMPONENT" {
         "user",
         "frontend"
     ]
-    }
-variable "AMI" {default = ""}
-variable "INSTANCE_TYPE" {default = ""}
-variable "REGION" {default = ""}
-variable "ENV" {default = ""}
+
+INSTANCE_TYPE = "t2.micro"
+AMI           = [data.aws_ami.AMI]
+REGION        = "us-east-1"
+ENV           = "test"

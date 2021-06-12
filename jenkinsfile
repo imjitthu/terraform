@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ('Creating infra for RoboShop') {
+            steps {
+                sh "terrafrom apply -auto-approve"
+            }
+        }
+    }
+}
