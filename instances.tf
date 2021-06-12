@@ -5,7 +5,7 @@ resource "aws_spot_instance_request" "instance" {
   instance_type = "${var.INSTANCE_TYPE}"
   user_data = "set hostname ${element(var.COMPONENT, count.index)}"
   tags = {
-    Name = "${var.ENV}"-"${var.COMPONENT}"
+    Name = "${var.ENV}"-"${var.COMPONENT.name}"
   }
 }
 
