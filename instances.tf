@@ -10,7 +10,6 @@ resource "aws_instance" "instance" {
 
 
 resource "aws_route53_record" "roboshop" {
-  dynamic route {
     for_each   = var.COMPONENT
     allow_overwrite = true
     zone_id    = data.aws_route53_zone.jithendar.zone_id
@@ -18,6 +17,5 @@ resource "aws_route53_record" "roboshop" {
     type       = "A"
     ttl        = "300"
     records    = "${element(aws_instance.instance)}".private_ip
-}
 }
 
