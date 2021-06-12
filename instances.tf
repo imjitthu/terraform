@@ -4,12 +4,10 @@ resource "aws_spot_instance_request" "instance" {
   spot_price = "0.03"
   instance_type = "${var.INSTANCE_TYPE}"
   user_data = "set hostname ${element(var.COMPONENT, count.index)}"
-
-  tags {
-    key = "param"
-    value = "${var.COMPONENT}"
-    propagate_at_launch = true
+  tags = {
+    Name = "${var.ENV}"-"${var.COMPONENT}"
   }
 }
 
 #cidr_block = "${element(var.SUBNET_CIDR, count.index)}"
+#Name = "${element(var.COMPONENT, count.index)}"-"${var.ENV} + 1"
