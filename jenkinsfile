@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     parameters {
-    choice(name: 'tfaction', choices: ['init', 'plan', 'apply', 'destroy'], description: 'Pick any action')
+    choice(name: 'tfaction', choices: ['init', 'plan', 'validate', 'apply', 'destroy'], description: 'Pick any action')
                }
 
     stages {
@@ -21,6 +21,9 @@ pipeline {
                     } 
                     if (params.tfaction == 'destroy') {
                     sh "terraform destroy -auto-approve"   
+                    }
+                    if (params.tfaction == 'validate') {
+                    sh "terraform validate"   
                     }                         
                     }
                     }
