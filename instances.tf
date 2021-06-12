@@ -8,10 +8,10 @@ resource "aws_instance" "instance" {
   }
 
 provisioner "local-exec" {
-    command = "echo ${element(aws_instance.instance, count.index).private_ip} >> /tmp/inv.txt"
+  count = length(aws_instance.instance)
+  command = "echo ${element(aws_instance.instance, count.index).private_ip} >> /tmp/inv.txt"
   }
 }
-
 
 resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)
