@@ -18,7 +18,7 @@ output "Component" {
 
 resource "aws_route53_record" "roboshop" {
   #for_each = toset(var.COMPONENT)
-  count = length(var.COMPONENT)
+  count = element(var.COMPONENT, count.index)
   allow_overwrite = true
   zone_id    = data.aws_route53_zone.jithendar.zone_id
   name       = "${element(var.COMPONENT, count.index)}".data.aws_route53_zone.jithendar.name
