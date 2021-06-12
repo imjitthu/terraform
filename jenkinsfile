@@ -20,8 +20,6 @@ pipeline {
                     sh "terraform apply -auto-approve"
                     sh "git clone https://github.com/imjitthu/Ansible.git"
                     sh "pwd; ls"
-                    ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: '/tmp/inv.txt', playbook: 'ansible/roboshop.yml'
-                    sh "rm -rvf /tmp/inv.txt" 
                     } 
                     if (params.tfaction == 'destroy') {
                     sh "terraform destroy -auto-approve"   
@@ -32,5 +30,11 @@ pipeline {
                     }
                     }
                   }
+        stage ('Installing Components') {
+            steps {
+                ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: '/tmp/inv.txt', playbook: 'ansible/roboshop.yml'
+                sh "rm -rvf /tmp/inv.txt" 
+                }
+                }
                 }
             }
