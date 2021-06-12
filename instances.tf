@@ -18,10 +18,10 @@ output "Component" {
 
 resource "aws_route53_record" "roboshop" {
     count =    length(var.COMPONENT)
-    #for_each   = toset(var.COMPONENT)
+    for_each   = toset(var.COMPONENT)
     allow_overwrite = true
     zone_id    = data.aws_route53_zone.jithendar.zone_id
-    name       = "${var.COMPONENT, count.index}".data.aws_route53_zone.jithendar.name
+    name       = each.value.data.aws_route53_zone.jithendar.name
     type       = "A"
     ttl        = "300"
     records    = "${element(aws_instance.instance[*], count.index)}".private_ip
