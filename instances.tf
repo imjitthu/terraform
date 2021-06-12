@@ -9,7 +9,7 @@ resource "aws_instance" "instance" {
 }
 
 output "ami" {
-  value = element(aws_instance.instance[*].ami, index)
+  value = toset(aws_instance.[index].ami)
 }
 
 # resource "aws_route53_record" "roboshop" {
