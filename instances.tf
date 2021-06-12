@@ -6,9 +6,12 @@ resource "aws_instance" "instance" {
   tags = {
     Name = "${element(var.COMPONENT, count.index)}-${var.ENV}"
   }
+}
 
-provisioner "local-exec" {
-  command = "echo ${element(aws_instance.instance, count.index).private_ip} >> /tmp/inv.txt"
+resource "null_resource" "make_inv" {
+  count   = length(aws_instance.instance)
+  provisioner "local-exec" {
+    command = "echo ${element(aws_instance.instance, count.index).private_ip} >> /tmp/inv.txt"
   }
 }
 
