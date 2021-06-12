@@ -6,7 +6,7 @@ resource "aws_instance" "name" {
   instance_type = "${var.INSTANCE_TYPE}"
   user_data = "set hostname ${element(var.COMPONENT, count.index)}"
   tags = {
-    Name = "${var.ENV}" count.index + 1
+    Name = "${var.ENV}"
     #Name = "${element(var.COMPONENT, count.index)}"-"${var.ENV} + 1"
   }
 }
