@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh "sh mkinv.sh"
                 sh "git clone https://github.com/imjitthu/Ansible.git"
-                ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: 'inv.txt', playbook: 'Ansible/roboshop.yml'
+                ansiblePlaybook credentialsId: 'DevOps321', installation: 'ansibletool', inventory: 'inv', playbook: 'Ansible/roboshop.yml'
                 }
                 }
                 }
