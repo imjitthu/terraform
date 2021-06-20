@@ -8,13 +8,13 @@ resource "aws_instance" "instance" {
   }
 }
 
-# resource "null_resource" "make_inv" {
-#   count   = length(aws_instance.instance)
-#   provisioner "local-exec" {
-#     command = "sed -i s/-env/${var.ENV}/ mkinv.sh"
-#     command = "echo ${element(aws_instance.instance, count.index).private_ip} component=${element(var.COMPONENT, count.index)} >> inv.txt"
-#   }
-# }
+resource "null_resource" "make_inv" {
+  count   = length(aws_instance.instance)
+  provisioner "local-exec" {
+    command = "sed -i s/-env/${var.ENV}/g mkinv.sh"
+  }
+}
+#command = "echo ${element(aws_instance.instance, count.index).private_ip} component=${element(var.COMPONENT, count.index)} >> inv.txt"
 
 resource "aws_route53_record" "roboshop" {
   count = length(var.COMPONENT)

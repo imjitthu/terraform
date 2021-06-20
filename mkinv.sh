@@ -5,3 +5,6 @@ for component in frontend-env catalogue-env cart-env user-env shipping-env payme
     echo $IP component=${component} ansible_user=root ansible_password=DevOps321 >>inv
   fi
 done
+
+
+#aws ec2 describe-instances --query "Reservations[*].Instances[*].PrivateIpAddress" --output=text
