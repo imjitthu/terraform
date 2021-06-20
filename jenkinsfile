@@ -5,7 +5,6 @@ pipeline {
     stages {
         stage ('RoboShop') {
             steps {
-                helloWorld()
                 rsApp("plan")
             }
         }
