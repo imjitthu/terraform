@@ -1,5 +1,6 @@
 @Library('shared_library') _
 
+helloWorld()
 rsApp("plan")
 
 // pipeline {
