@@ -1,16 +1,3 @@
 @Library('shared_library') _
 
 helloWorld()
-rsApp("plan")
-
-// pipeline {
-//     agent any
-//     stages {
-//         stage ('RoboShop') {
-//             steps {
-//                 helloWorld()
-//                 rsApp("plan")
-//             }
-//         }
-//     }
-// }
