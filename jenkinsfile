@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ('RoboShop') {
             steps {
-                App('apply')
+                App('plan')
             }
         }
     }
